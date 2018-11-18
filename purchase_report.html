@@ -153,6 +153,18 @@
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
+                                <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="add_product.html">Add new Product</a>
+                                </li>
+                                <li>
+                                    <a href="view_product.html">Product Report</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
                                 <i class="fas fa-chart-bar"></i>Stock<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
@@ -330,68 +342,96 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <!-- Start to Copy From Here -->
-                            <div class="col-lg-6">
-                                <div class="card">
-                                    <div class="card-header"><b>Stock Information</b></div>
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <h3 class="text-center title-2">Add Produtc In Stock</h3>
-                                        </div>
-                                        <hr>
-                                        <form action="" method="post" novalidate="novalidate">
-                                            <div class="form-group">
-                                                <label for="product_name" class="control-label mb-1">Product Name</label>
-                                                <input id="product_name" name="product_name" type="text" class="form-control" aria-required="true" aria-invalid="false" >
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label for="product_gsm" class="control-label mb-1">GSM</label>
-                                                <input id="product_gsm" name="product_gsm" type="number" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
-                                                    autocomplete="cc-name" aria-required="false" aria-invalid="false" >
-                                                <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="product_width" class="control-label mb-1">Width</label>
-                                                        <input id="product_width" name="product_width" type="number" class="form-control cc-exp" value="" data-val="true" 
-                                                             placeholder="Width in Inch"
-                                                            autocomplete="product_width">
-                                                        <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="product_height" class="control-label mb-1">Height</label>
-                                                    <div class="input-group">
-                                                        <input id="product_height" name="product_height" type="number" class="form-control cc-cvc" value="" data-val="true" 
-                                                            placeholder="Height in Inch"
-                                                            autocomplete="off">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Product MT</label>
-                                                <input id="cc-number" name="cc-number" type="number" class="form-control cc-number identified visa" value="" data-val="true"
-                                                    autocomplete="cc-number">
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cc-number" class="control-label mb-1">Product Ream</label>
-                                                <input id="cc-number" name="cc-number" type="number" class="form-control cc-number identified visa" value="" data-val="true"
-                                                    autocomplete="cc-number">
-                                                <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
-                                            </div>
-                                            <div>
-                                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                                    <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                                    <span id="payment-button-amount">Pay $100.00</span>
-                                                    <span id="payment-button-sending" style="display:none;">Sending…</span>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+                            <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+                                <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3">
+                                        <h3>Product Table</h3>
+                                        <br>
+                                        <thead>
+                                            <tr>
+                                                <th>SL NO</th>
+                                                <th>Product Name</th>
+                                                <th>Product Size</th>
+                                                <th>Product Color</th>
+                                                <th colspan="2" style="text-align: center;">Action</th>
+                                                
+                                        
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td><button type="button" class="btn btn-success">Edit</button></td>
+                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td><button type="button" class="btn btn-success">Edit</button></td>
+                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>002</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td> 20" x 46"</td>
+                                                <td class="process">Yellow</td>
+                                                <td><button type="button" class="btn btn-success">Edit</button></td>
+                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>003</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>34 GSM 23" x 32"</td>
+                                                <td class="process">Yellow</td>
+                                                <td><button type="button" class="btn btn-success">Edit</button></td>
+                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>004</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td> 23" x 35"</td>
+                                                <td class="process">Yellow</td>
+                                                <td><button type="button" class="btn btn-success">Edit</button></td>
+                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>005</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>29 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td><button type="button" class="btn btn-success">Edit</button></td>
+                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>006</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 16"</td>
+                                                <td class="process">Yellow</td>
+                                                <td><button type="button" class="btn btn-success">Edit</button></td>
+                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td><button type="button" class="btn btn-success">Edit</button></td>
+                                                <td><button type="button" class="btn btn-danger">Delete</button></td>   
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+                                <!-- END DATA TABLE-->
                             </div>
+                        </div>
 
                         <!-- End the Copy From Here -->
                         <div class="row">
