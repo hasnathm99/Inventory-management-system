@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -73,28 +74,27 @@
                                 </li>
                             </ul> -->
                         </li>
-                        <li>
-                            <a href="chart.html">
-                                <i class="fas fa-chart-bar"></i>Product</a>
-                                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                        <li>
-                                            <a href="#">Add New Product</a>
-                                        </li>
-                                        <li>
-                                            <a href="index2.html">Product Report</a>
-                                        </li>
-                                        
-                                    </ul>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="add_product.html">Add new Product</a>
+                                </li>
+                                <li>
+                                    <a href="view_product.html">Product Report</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Stock</a>
                                     <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                         <li>
-                                            <a href="#">Add New Stock</a>
+                                            <a href="add_stock.html">Add New Stock</a>
                                         </li>
                                         <li>
-                                            <a href="index2.html">Stock Report</a>
+                                            <a href="view_stock.html">Stock Report</a>
                                         </li>
                                         
                                     </ul>
@@ -167,21 +167,23 @@
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-chart-bar"></i>Stock<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                
                                 <li>
-                                    <a href="view_stock.html">Stock Report</a>
+                                    <a href="login.html">Add new Stock</a>
+                                </li>
+                                <li>
+                                    <a href="register.html">Stock Report</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Purchase<i class="fas fa-caret-down caret"></i></a>
+                                <i class="fas fa-table"></i>Supplier<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="product_purchase.html">Product Purchase</a>
+                                    <a href="login.html">Add new Supplier</a>
                                 </li>
                                 <li>
-                                    <a href="purchase_report.html">Purchased Report</a>
+                                    <a href="register.html">Suppliers List</a>
                                 </li>
                             </ul>
                         </li>
@@ -190,10 +192,10 @@
                                 <i class="far fa-check-square"></i>Sales<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="add_sales.html">Add Sales</a>
+                                    <a href="login.html">Add Sales</a>
                                 </li>
                                 <li>
-                                    <a href="sales_report.html">Sales Table</a>
+                                    <a href="register.html">Sales Table</a>
                                 </li>
                             </ul>
                         </li>
@@ -202,20 +204,17 @@
                                 <i class="far fa-check-square"></i>Expense<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="daily_expense.html">Daily Expenses</a>
+                                    <a href="login.html">Add Expenses</a>
                                 </li>
                                 <li>
-                                    <a href="monthly_expense.html">Monthly Expenses</a>
-                                </li>
-                                <li>
-                                    <a href="expense_view.html">Expense View</a>
+                                    <a href="register.html">Expense Table</a>
                                 </li>
                             </ul>
                         </li>
-                       <!--  <li>
+                        <li>
                             <a href="#">
                                 <i class="fas fa-calendar-alt"></i>Reports</a>
-                        </li> -->
+                        </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Users<i class="fas fa-caret-down caret"></i></a>
@@ -342,89 +341,52 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">overview</h2>
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-25">
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>10368</h2>
-                                                <span>members online</span>
-                                            </div>
+                        <!-- Start to Copy From Here -->
+
+                        <form>
+                             <div class="col-lg-8">
+                                <h3>Monthly Expense</h3>
+                                <br>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Expense </strong>
+                                        <small> Form</small>
+                                    </div>
+                                    <div class="card-body card-block">
+                                        <div class="form-group">
+                                            <label for="company" class=" form-control-label">Electricity Bill</label>
+                                            <input type="number" id="company" placeholder="Enter Bill" class="form-control">
                                         </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
+                                        <div class="form-group">
+                                            <label for="vat" class=" form-control-label">Water Bill</label>
+                                            <input type="number" id="vat" placeholder="Enter Bill" class="form-control">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="street" class=" form-control-label">Internet Bill</label>
+                                            <input type="number" id="street" placeholder="Enter Bill" class="form-control">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="country" class=" form-control-label">Donation</label>
+                                            <input type="number" id="country" placeholder="Enter Donation" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="other" class=" form-control-label">Others</label>
+                                            <input type="number" id="other" placeholder="Enter Other Bill" class="form-control">
+                                        </div>
+
+                                        <div>
+                                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                                    <i class="fa fa-lock fa-lg"></i>&nbsp;
+                                                    <span id="payment-button-amount">Save</span>
+                                                    <span id="payment-button-sending" style="display:none;">Saving...</span>
+                                                </button>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>388,688</h2>
-                                                <span>items solid</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c3">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>1,086</h2>
-                                                <span>this week</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c4">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>$1,060,386</h2>
-                                                <span>total earnings</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
+                        <!-- End the Copy From Here -->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">

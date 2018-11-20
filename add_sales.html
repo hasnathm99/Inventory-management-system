@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -73,28 +74,27 @@
                                 </li>
                             </ul> -->
                         </li>
-                        <li>
-                            <a href="chart.html">
-                                <i class="fas fa-chart-bar"></i>Product</a>
-                                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                        <li>
-                                            <a href="#">Add New Product</a>
-                                        </li>
-                                        <li>
-                                            <a href="index2.html">Product Report</a>
-                                        </li>
-                                        
-                                    </ul>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="add_product.html">Add new Product</a>
+                                </li>
+                                <li>
+                                    <a href="view_product.html">Product Report</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Stock</a>
                                     <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                         <li>
-                                            <a href="#">Add New Stock</a>
+                                            <a href="add_stock.html">Add New Stock</a>
                                         </li>
                                         <li>
-                                            <a href="index2.html">Stock Report</a>
+                                            <a href="view_stock.html">Stock Report</a>
                                         </li>
                                         
                                     </ul>
@@ -167,21 +167,23 @@
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-chart-bar"></i>Stock<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                
                                 <li>
-                                    <a href="view_stock.html">Stock Report</a>
+                                    <a href="login.html">Add new Stock</a>
+                                </li>
+                                <li>
+                                    <a href="register.html">Stock Report</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Purchase<i class="fas fa-caret-down caret"></i></a>
+                                <i class="fas fa-table"></i>Supplier<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="product_purchase.html">Product Purchase</a>
+                                    <a href="login.html">Add new Supplier</a>
                                 </li>
                                 <li>
-                                    <a href="purchase_report.html">Purchased Report</a>
+                                    <a href="register.html">Suppliers List</a>
                                 </li>
                             </ul>
                         </li>
@@ -190,10 +192,10 @@
                                 <i class="far fa-check-square"></i>Sales<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="add_sales.html">Add Sales</a>
+                                    <a href="login.html">Add Sales</a>
                                 </li>
                                 <li>
-                                    <a href="sales_report.html">Sales Table</a>
+                                    <a href="register.html">Sales Table</a>
                                 </li>
                             </ul>
                         </li>
@@ -202,20 +204,17 @@
                                 <i class="far fa-check-square"></i>Expense<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="daily_expense.html">Daily Expenses</a>
+                                    <a href="login.html">Add Expenses</a>
                                 </li>
                                 <li>
-                                    <a href="monthly_expense.html">Monthly Expenses</a>
-                                </li>
-                                <li>
-                                    <a href="expense_view.html">Expense View</a>
+                                    <a href="register.html">Expense Table</a>
                                 </li>
                             </ul>
                         </li>
-                       <!--  <li>
+                        <li>
                             <a href="#">
                                 <i class="fas fa-calendar-alt"></i>Reports</a>
-                        </li> -->
+                        </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Users<i class="fas fa-caret-down caret"></i></a>
@@ -342,89 +341,134 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="row">
+                        <!-- Start to Copy From Here -->
+                            
+                                <form>
+                                    <div class="col-lg-7">
+                                        <div class="card">
+                                            <div class="card-header">Sales Information</div>
+                                            <div class="card-body">
+                                                <div class="card-title">
+                                                    <h3 class="text-center title-2">Provide Information</h3>
+                                                </div>
+                                                <hr>
+                                                
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="dc_date" class="control-label mb-1">DC Date</label>
+                                                                <input id="dc_date" name="dc_date" type="date" class="form-control cc-exp" value="" data-val="true"
+                                                                    autocomplete="cc-exp" data-val-required="Please enter DC Date">
+                                                                <span class="help-block"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="dc_no" class="control-label mb-1">DC NO</label>
+                                                            <div class="input-group">
+                                                                <input id="dc_no" name="dc_no" type="number" class="form-control cc-cvc" value="" data-val="true" 
+                                                                    autocomplete="off" data-val-required="Please enter DC Date">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="order_date" class="control-label mb-1">Order Date</label>
+                                                                <input id="order_date" name="order_date" type="date" class="form-control cc-exp" value="" data-val="true" 
+                                                                    autocomplete="cc-exp" data-val-required="Please enter order Date">
+                                                                <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="order_no" class="control-label mb-1">Order No</label>
+                                                            <div class="input-group">
+                                                                <input id="order_no" name="order_no" type="number" class="form-control cc-cvc" value="" data-val="true" data-val-required="Please enter order number"
+                                                                     autocomplete="off">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row m-t-30">
                             <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">overview</h2>
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
+                                <!-- DATA TABLE-->
+                                <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3">
+                                        <h3>Product Table</h3>
+                                        <br>
+                                        <thead>
+                                            <tr>
+                                                <th>Item Name</th>
+                                                <th>MT</th>
+                                                <th>Ream</th>
+                                                <th>Unit Price</th>
+                                                <th>Discount Percent</th>
+                                                <th>Total Discount</th>
+                                                <th>Vat</th>
+                                                <th>Total Vat</th>
+                                                <th>Total</th>
+                                                <th colspan="2" style="text-align: center;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Select</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control">
+                                                        <option value="0">Please select</option>
+                                                        <option value="1">Option #1</option>
+                                                        <option value="2">Option #2</option>
+                                                        <option value="3">Option #3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                                </td>
+                                                <td>
+                                                    <div class="row form-group">
+                                                        <div class="">
+                                                            <label for="selectSm" class=" form-control-label">Select Small</label>
+                                                        </div>
+                                                        <div class="">
+                                                            <select name="selectSm" id="SelectSm" class="form-control-xs form-control">
+                                                                <option value="0">Please select</option>
+                                                                <option value="1">Option #1</option>
+                                                                <option value="2">Option #2</option>
+                                                                <option value="3">Option #3</option>
+                                                                <option value="4">Option #4</option>
+                                                                <option value="5">Option #5</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td class="process">Yellow</td>
+                                                <td class="process">Yellow</td>
+                                                <td class="process">Yellow</td>
+                                                <td class="process">Yellow</td>
+                                                <td class="process">Yellow</td>
+                                                <td><button type="button" class="btn btn-success">New</button></td>
+                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
+                                                
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
                                 </div>
+                                <!-- END DATA TABLE-->
                             </div>
                         </div>
-                        <div class="row m-t-25">
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>10368</h2>
-                                                <span>members online</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>388,688</h2>
-                                                <span>items solid</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c3">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>1,086</h2>
-                                                <span>this week</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c4">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>$1,060,386</h2>
-                                                <span>total earnings</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                </form>
+                            
+                        <!-- End the Copy From Here -->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
