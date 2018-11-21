@@ -156,7 +156,7 @@
                                 <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="add_product.html">Add new Product</a>
+                                    <a href="add_product.php">Add new Product</a>
                                 </li>
                                 <li>
                                     <a href="view_product.html">Product Report</a>
