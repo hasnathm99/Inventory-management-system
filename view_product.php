@@ -1,3 +1,6 @@
+<?php
+require_once('include\db_connect.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -355,76 +358,29 @@
                                                 <th>Product Name</th>
                                                 <th>Product Size</th>
                                                 <th>Product Color</th>
-                                                <th colspan="2" style="text-align: center;">Action</th>
-                                                
-                                        
+                                                <th colspan="2" style="text-align: center;">Action</th>                               
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>001</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td>55 GSM 23" x 36"</td>
-                                                <td class="process">Yellow</td>
-                                                <td><button type="button" class="btn btn-success">Edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
+                                            <?php
+                                                $counter=0;
                                                 
-                                            </tr>
+                                                $query="select * from product";
+                                                $query_run=mysqli_query($connect, $query);
+                                                while($row=mysqli_fetch_array($query_run)){
+                                                    $counter++;
+
+                                                ?>
                                             <tr>
-                                                <td>001</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td>55 GSM 23" x 36"</td>
-                                                <td class="process">Yellow</td>
-                                                <td><button type="button" class="btn btn-success">Edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>002</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td> 20" x 46"</td>
-                                                <td class="process">Yellow</td>
-                                                <td><button type="button" class="btn btn-success">Edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>003</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td>34 GSM 23" x 32"</td>
-                                                <td class="process">Yellow</td>
-                                                <td><button type="button" class="btn btn-success">Edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>004</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td> 23" x 35"</td>
-                                                <td class="process">Yellow</td>
-                                                <td><button type="button" class="btn btn-success">Edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>005</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td>29 GSM 23" x 36"</td>
-                                                <td class="process">Yellow</td>
-                                                <td><button type="button" class="btn btn-success">Edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>006</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td>55 GSM 23" x 16"</td>
-                                                <td class="process">Yellow</td>
-                                                <td><button type="button" class="btn btn-success">Edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">Delete</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>001</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td>55 GSM 23" x 36"</td>
-                                                <td class="process">Yellow</td>
-                                                <td><button type="button" class="btn btn-success">Edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">Delete</button></td>   
+
+                                                <td><?php echo $counter; ?></td>
+                                                <td><?php echo $row['product_name']; ?></td>
+                                                <td><?php echo $row['product_gsm'].' GSM '.$row['product_width'].'" X '. $row['product_height'].'"' ; ?></td>
+                                                <td><?php echo $row['product_color']; ?></td>
+                                                <td><button type="button" class="btn btn-success">edit</button></td>
+                                                <td><button type="button" class="btn btn-danger">delete</button></td>
+                                                
+                                            <?php } ?>
                                             </tr>
                                         </tbody>
                                     </table>
