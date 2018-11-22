@@ -5,7 +5,7 @@ echo $id=$_GET['id'];
 $query="delete from product where id='$id' ";
 $query_run=mysqli_query($connect , $query);
 if($query_run){
-	$message="Product Deleted Successfully";
+	
 	header( "refresh:0;url=../view_product.php" );
 }else{
 	$message="Can Not Delete Product.Try Again...";
