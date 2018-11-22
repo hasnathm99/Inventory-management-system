@@ -13,18 +13,17 @@ if(isset($_POST['submit'])){
 		$query="insert into product(product_name, product_color, product_gsm, product_thickness, product_width, product_height) values('$product_name' , '$product_color' , '$product_gsm' , '$product_thickness' , '$product_width' , '$product_height')";
 		$query_run=mysqli_query($connect ,$query );
 		if($query_run){
-			$message="information Added Successfully";
-			header('location:');
-			?>
-			<script type="text/javascript">
-				var message= '<?php echo $message; ?>';
-				alert(message);
-			</script>
-			<?php
+			$message="Product Added Successfully";
+			header( "refresh:0;url=../view_product.php" );
 		}else{
-			echo "not added";
+			$message="Can Not Add Product.Try Again...";
+			header( "refresh:0;url=../view_product.php" );
 		}
 	}
 }
 
 ?>
+	<script type="text/javascript">
+		var message= '<?php echo $message; ?>';
+		alert(message);
+	</script>
