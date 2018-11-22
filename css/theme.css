@@ -675,7 +675,15 @@ section {
     background: rgba(255, 255, 255, 0.051);
     color: #999;
 }
-
+.pu-input{
+    width: 100px;
+    border-radius: 0.25;
+    border:1px solid grey;
+    box-shadow: 2 2 2 grey;
+}
+.pu-input:hover{
+    border-color: blue;
+}
 .form-header2 .au-input::-webkit-input-placeholder {
     /* WebKit, Blink, Edge */
     color: #999;
