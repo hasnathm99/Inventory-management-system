@@ -1,5 +1,20 @@
+<?php
+ob_start();
+session_start();
+if(!isset($_SESSION['user_id'])){
+  echo '<h2 style="color:#C9302C">Log in First<h2>';
+  header('Location:../login.php');
+  
+  die();
+}
+require_once('db_connect.php');
+$query="select * from users";
+$query_run=mysqli_query($connect , $query);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -12,25 +27,25 @@
     <title>Dashboard</title>
 
     <!-- Fontfaces CSS-->
-    <link href="css/font-face.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="../css/font-face.css" rel="stylesheet" media="all">
+    <link href="../vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link href="../vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="../vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="../vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="css/theme.css" rel="stylesheet" media="all">
+    <link href="../css/theme.css" rel="stylesheet" media="all">
 
 </head>
 
@@ -73,28 +88,27 @@
                                 </li>
                             </ul> -->
                         </li>
-                        <li>
-                            <a href="chart.html">
-                                <i class="fas fa-chart-bar"></i>Product</a>
-                                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                        <li>
-                                            <a href="#">Add New Product</a>
-                                        </li>
-                                        <li>
-                                            <a href="index2.html">Product Report</a>
-                                        </li>
-                                        
-                                    </ul>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="add_product.html">Add new Product</a>
+                                </li>
+                                <li>
+                                    <a href="view_product.html">Product Report</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Stock</a>
                                     <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                         <li>
-                                            <a href="#">Add New Stock</a>
+                                            <a href="add_stock.html">Add New Stock</a>
                                         </li>
                                         <li>
-                                            <a href="index2.html">Stock Report</a>
+                                            <a href="view_stock.html">Stock Report</a>
                                         </li>
                                         
                                     </ul>
@@ -167,21 +181,23 @@
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-chart-bar"></i>Stock<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                
                                 <li>
-                                    <a href="view_stock.html">Stock Report</a>
+                                    <a href="login.html">Add new Stock</a>
+                                </li>
+                                <li>
+                                    <a href="register.html">Stock Report</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Purchase<i class="fas fa-caret-down caret"></i></a>
+                                <i class="fas fa-table"></i>Supplier<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="product_purchase.html">Product Purchase</a>
+                                    <a href="login.html">Add new Supplier</a>
                                 </li>
                                 <li>
-                                    <a href="purchase_report.html">Purchased Report</a>
+                                    <a href="register.html">Suppliers List</a>
                                 </li>
                             </ul>
                         </li>
@@ -190,10 +206,10 @@
                                 <i class="far fa-check-square"></i>Sales<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="add_sales.html">Add Sales</a>
+                                    <a href="login.html">Add Sales</a>
                                 </li>
                                 <li>
-                                    <a href="sales_report.html">Sales Table</a>
+                                    <a href="register.html">Sales Table</a>
                                 </li>
                             </ul>
                         </li>
@@ -202,35 +218,17 @@
                                 <i class="far fa-check-square"></i>Expense<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="daily_expense.html">Daily Expenses</a>
+                                    <a href="login.html">Add Expenses</a>
                                 </li>
                                 <li>
-                                    <a href="monthly_expense.html">Monthly Expenses</a>
-                                </li>
-                                <li>
-                                    <a href="expense_view.html">Expense View</a>
+                                    <a href="register.html">Expense Table</a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="far fa-check-square"></i>Loss/Profit<i class="fas fa-caret-down caret"></i></a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="#">Daily Basis</a>
-                                </li>
-                                <li>
-                                    <a href="#">Monthly Basis</a>
-                                </li>
-                                <li>
-                                    <a href="#">Yearly Basis</a>
-                                </li>
-                            </ul>
-                        </li>
-                       <!--  <li>
+                        <li>
                             <a href="#">
                                 <i class="fas fa-calendar-alt"></i>Reports</a>
-                        </li> -->
+                        </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Users<i class="fas fa-caret-down caret"></i></a>
@@ -309,7 +307,7 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="images/icon/download.png" alt="Sharif Stationary" />
+                                            <img src="../images/icon/download.png" alt="Sharif Stationary" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">Sharif Stationary</a>
@@ -318,7 +316,7 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="images/icon/download.png" alt="Sharif Stationary" />
+                                                        <img src="../images/icon/download.png" alt="Sharif Stationary" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -357,126 +355,80 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="row">
+                       <!--  Start Copy From Here -->
+                       <div class="row m-t-30">
                             <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">overview</h2>
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
+                                <!-- DATA TABLE-->
+                                <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3">
+                                        <h3>Accounts Table</h3>
+                                        <br>
+                                        <thead>
+                                            <tr>
+                                                <th>SL NO</th>
+                                                <th>User Name</th>
+                                                <th>User Password</th>
+                                                <th colspan="2">Action</th>
+                                                                              
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                                $counter=0;
+                                                $query="select * from users";
+                                                $query_run=mysqli_query($connect, $query);
+                                                while($row=mysqli_fetch_array($query_run)){
+                                                    $counter++;
+
+                                                ?>
+                                            <tr>
+
+                                                <td><?php echo $counter; ?></td>
+                                                <td><?php echo $row['name']; ?></td>
+                                                <td>••••••••••</td>
+                                                
+                                                <td><a href="..\inc.process\edit_account_setings.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
+
+                                                <td><a href="inc.process/delete_account_setings.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" onclick=" return confirm('Sure you want to delete???');" >Delete</button></a></td>
+                                                
+                                            <?php } ?>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+                                <!-- END DATA TABLE-->
                             </div>
                         </div>
-                        <div class="row m-t-25">
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>10368</h2>
-                                                <span>members online</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>388,688</h2>
-                                                <span>items solid</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c3">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>1,086</h2>
-                                                <span>this week</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c4">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>$1,060,386</h2>
-                                                <span>total earnings</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>Copyright © 2018 Utshab Technologies. All rights reserved. Template by <a href="https://colorlib.com">Utshab Technologies</a>.</p>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
-            </div>
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
-        </div>
+            </div>
 
     </div>
 
     <!-- Jquery JS-->
-    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <script src="../vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
-    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="../vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="../vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
+    <script src="../vendor/slick/slick.min.js">
     </script>
-    <script src="vendor/wow/wow.min.js"></script>
-    <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    <script src="../vendor/wow/wow.min.js"></script>
+    <script src="../vendor/animsition/animsition.min.js"></script>
+    <script src="../vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
     </script>
-    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
+    <script src="../vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="../vendor/counter-up/jquery.counterup.min.js">
     </script>
-    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="vendor/select2/select2.min.js">
+    <script src="../vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../vendor/select2/select2.min.js">
     </script>
 
     <!-- Main JS-->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 
 </body>
 
