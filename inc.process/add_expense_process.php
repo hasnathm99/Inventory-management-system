@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
     $remarks=test_input($_POST['remarks']);
     $date=test_input($_POST['date']);
 
-    $query="insert into expense(title,amount,remarks,date) values('$title' , '$amount' , 'remarks' , '$date') ";
+    $query="insert into expense(title,amount,remarks,date) values('$title' , '$amount' , '$remarks' , '$date') ";
     $query_run=mysqli_query($connect, $query);
     if($query_run){
     	$message="Information Added Successfully";
