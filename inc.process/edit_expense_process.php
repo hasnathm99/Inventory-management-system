@@ -1,5 +1,6 @@
 <?php
-require_once('include\db_connect.php');
+require_once('db_connect.php');
+$id=$_GET['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,25 +17,25 @@ require_once('include\db_connect.php');
     <title>Dashboard</title>
 
     <!-- Fontfaces CSS-->
-    <link href="css/font-face.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="../css/font-face.css" rel="stylesheet" media="all">
+    <link href="../vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link href="../vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="../vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="../vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="css/theme.css" rel="stylesheet" media="all">
+    <link href="../css/theme.css" rel="stylesheet" media="all">
 
 </head>
 
@@ -296,7 +297,7 @@ require_once('include\db_connect.php');
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="images/icon/download.png" alt="Sharif Stationary" />
+                                            <img src="../images/icon/download.png" alt="Sharif Stationary" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">Sharif Stationary</a>
@@ -305,7 +306,7 @@ require_once('include\db_connect.php');
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="images/icon/download.png" alt="Sharif Stationary" />
+                                                        <img src="../images/icon/download.png" alt="Sharif Stationary" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -345,55 +346,52 @@ require_once('include\db_connect.php');
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <!-- Start to Copy From Here -->
-                            
-                                <form action="inc.process\add_product_process.php" method="POST">
+                            <?php
+                            $query1="select * from expense where id=$id ";
+							$query1_run=mysqli_query($connect , $query1);
+							while($row=mysqli_fetch_array($query1_run)){
+								$title=$row['title'];
+								$amount=$row['amount'];
+								$remarks=$row['remarks'];
+								$date=$row['date'];
+								
+							}
+                            ?>
+                                <form action="edit_expense_process_func.php?id=<?php echo $id; ?>" method="POST">
                                     <div class="col-lg-10">
                                 <div class="card">
-                                    <div class="card-header"><b>Product Information</b></div>
+                                    <div class="card-header"><b>Edit Expense Information</b></div>
                                     <div class="card-body">
                                         <div class="card-title">
-                                            <h3 class="text-center title-2"> Add New Product</h3>
+                                            <h3 class="text-center title-2">Provide New Information</h3>
                                         </div>
                                         <hr>
-                                        
+                                        <form action="" method="post" novalidate="novalidate">
                                             <div class="form-group">
-                                                <label for="product_name" class="control-label mb-1">Product Name</label>
-                                                <input id="product_name" name="product_name" type="text" class="form-control" required="must fill product name" >
+                                                <label for="title" class="control-label mb-1">Title</label>
+                                                <input id="title" name="title" type="text" class="form-control" value="<?php echo $title; ?>" >
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="product_color" class="control-label mb-1">Product Color</label>
-                                                <input id="product_color" name="product_color" type="text" class="form-control " >
+                                                <label for="amount" class="control-label mb-1">Amount</label>
+                                                <input id="amount" name="amount" type="text" class="form-control " value="<?php echo $amount; ?>">
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="product_gsm" class="control-label mb-1">GSM</label>
-                                                <input id="product_gsm" name="product_gsm" type="text" class="form-control " >
+                                                <label for="remarks" class="control-label mb-1">Remarks</label>
+                                                <input id="remarks" name="remarks" type="text" class="form-control " value="<?php echo $remarks; ?>">
                                             </div>
                                             <div class="form-group">
-                                                <label for="product_thickness" class="control-label mb-1">Thickness</label>
-                                                <input id="product_thickness" name="product_thickness" type="text" class="form-control " >
+                                                <label for="date" class="control-label mb-1">Date</label>
+                                                <input id="date" name="date" type="date" class="form-control " value="<?php echo $date; ?>">
                                             </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="product_width" class="control-label mb-1">Width</label>
-                                                        <input id="product_width" name="product_width" type="text" class="form-control " placeholder="Width in Inch"  required="must fill product width">
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="product_height" class="control-label mb-1">Height</label>
-                                                    <div class="input-group">
-                                                        <input id="product_height" name="product_height" type="text" class="form-control " value="" placeholder="Height in Inch"  required="must fill product height">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                             <div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-lg btn-info btn-block">
                                                     <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                                    <span id="payment-button-amount">Save</span>
-                                                    <span id="payment-button-sending" style="display:none;">Saving...</span>
+                                                    <span id="payment-button-amount">Update</span>
+                                                    <span id="payment-button-sending" style="display:none;">Updating...</span>
                                                 </button>
                                             </div>
-                                        
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -417,26 +415,26 @@ require_once('include\db_connect.php');
     </div>
 
     <!-- Jquery JS-->
-    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <script src="../vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
-    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="../vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="../vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
+    <script src="../vendor/slick/slick.min.js">
     </script>
-    <script src="vendor/wow/wow.min.js"></script>
-    <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    <script src="../vendor/wow/wow.min.js"></script>
+    <script src="../vendor/animsition/animsition.min.js"></script>
+    <script src="../vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
     </script>
-    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
+    <script src="../vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="../vendor/counter-up/jquery.counterup.min.js">
     </script>
-    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="vendor/select2/select2.min.js">
+    <script src="../vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../vendor/select2/select2.min.js">
     </script>
 
     <!-- Main JS-->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 
 </body>
 

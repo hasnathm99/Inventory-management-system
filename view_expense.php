@@ -345,60 +345,53 @@ require_once('include\db_connect.php');
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <!-- Start to Copy From Here -->
-                            
-                                <form action="inc.process\add_product_process.php" method="POST">
-                                    <div class="col-lg-10">
-                                <div class="card">
-                                    <div class="card-header"><b>Product Information</b></div>
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <h3 class="text-center title-2"> Add New Product</h3>
-                                        </div>
-                                        <hr>
-                                        
-                                            <div class="form-group">
-                                                <label for="product_name" class="control-label mb-1">Product Name</label>
-                                                <input id="product_name" name="product_name" type="text" class="form-control" required="must fill product name" >
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label for="product_color" class="control-label mb-1">Product Color</label>
-                                                <input id="product_color" name="product_color" type="text" class="form-control " >
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label for="product_gsm" class="control-label mb-1">GSM</label>
-                                                <input id="product_gsm" name="product_gsm" type="text" class="form-control " >
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="product_thickness" class="control-label mb-1">Thickness</label>
-                                                <input id="product_thickness" name="product_thickness" type="text" class="form-control " >
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="product_width" class="control-label mb-1">Width</label>
-                                                        <input id="product_width" name="product_width" type="text" class="form-control " placeholder="Width in Inch"  required="must fill product width">
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="product_height" class="control-label mb-1">Height</label>
-                                                    <div class="input-group">
-                                                        <input id="product_height" name="product_height" type="text" class="form-control " value="" placeholder="Height in Inch"  required="must fill product height">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <button id="payment-button" type="submit" name="submit" class="btn btn-lg btn-info btn-block">
-                                                    <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                                    <span id="payment-button-amount">Save</span>
-                                                    <span id="payment-button-sending" style="display:none;">Saving...</span>
-                                                </button>
-                                            </div>
-                                        
-                                    </div>
+                            <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+                                <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3">
+                                        <h3>Expense Table</h3>
+                                        <br>
+                                        <thead>
+                                            <tr>
+                                                <th>SL NO</th>
+                                                <th>Title</th>
+                                                <th>Amount</th>
+                                                <th>Remarks</th>
+                                                <th>Date</th>
+                                                <th colspan="2" style="text-align: center;">Action</th>                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                                $counter=0;
+                                                
+                                                $query="select * from expense";
+                                                $query_run=mysqli_query($connect, $query);
+                                                while($row=mysqli_fetch_array($query_run)){
+                                                    $counter++;
+
+                                                ?>
+                                            <tr>
+
+                                                <td><?php echo $counter; ?></td>
+                                                <td><?php echo $row['title']; ?></td>
+                                                <td><?php echo $row['amount']; ?></td>
+                                                <td><?php echo $row['remarks']; ?></td>
+                                                <td><?php echo $row['date']; ?></td>
+                                                <td><a href="inc.process\edit_expense_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
+
+                                                <td><a href="inc.process/delete_product.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" onclick=" return confirm('Sure you want to delete???');" >Delete</button></a></td>
+                                                
+                                            <?php } ?>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+                                <!-- END DATA TABLE-->
                             </div>
-                                </form>
-                            
+                        </div>
+
                         <!-- End the Copy From Here -->
                         <div class="row">
                             <div class="col-md-12">

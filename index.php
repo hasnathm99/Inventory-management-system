@@ -214,13 +214,10 @@ if(!isset($_SESSION['user_id'])){
                                 <i class="far fa-check-square"></i>Expense<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="daily_expense.html">Daily Expenses</a>
+                                    <a href="add_expense.php">Expenses</a>
                                 </li>
                                 <li>
-                                    <a href="monthly_expense.html">Monthly Expenses</a>
-                                </li>
-                                <li>
-                                    <a href="expense_view.html">Expense View</a>
+                                    <a href="view_expense.php">Expense Report</a>
                                 </li>
                             </ul>
                         </li>
