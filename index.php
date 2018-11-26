@@ -178,7 +178,7 @@
                                 <i class="fas fa-table"></i>Purchase<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="product_purchase.html">Product Purchase</a>
+                                    <a href="product_purchase.php">Product Purchase</a>
                                 </li>
                                 <li>
                                     <a href="purchase_report.html">Purchased Report</a>

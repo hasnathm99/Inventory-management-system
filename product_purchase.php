@@ -1,3 +1,22 @@
+<?php
+//index.php
+
+$connect = new PDO("mysql:host=localhost;dbname=inventory_management_system", "root", "");
+function fill_product_select_box($connect)
+{
+ $output = '';
+ $query = "SELECT id,product_name FROM product ";
+ $statement = $connect->prepare($query);
+ $statement->execute();
+ $result = $statement->fetchAll();
+ foreach($result as $row)
+ {
+  $output .= '<option value="'.$row["product_name"].'">'.$row["product_name"].'</option>';
+ }
+ return $output;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,7 +115,7 @@
                                         <li>
                                             <a href="view_stock.html">Stock Report</a>
                                         </li>
-                                        
+
                                     </ul>
                         </li>
                         <li>
@@ -130,7 +149,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </div>
             </nav>
@@ -225,7 +244,7 @@
                                 <li>
                                     <a href="register.html">User List</a>
                                 </li>
-                                
+
                             </ul>
                         </li>
                     </ul>
@@ -249,7 +268,7 @@
                             </form>
                             <div class="header-button">
                                 <div class="noti-wrap">
-                                   
+
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-notifications"></i>
                                         <span class="quantity">3</span>
@@ -321,7 +340,7 @@
                                                     <a href="#">
                                                         <i class="zmdi zmdi-settings"></i>Setting</a>
                                                 </div>
-                                                
+
                                             </div>
                                             <div class="account-dropdown__footer">
                                                 <a href="#">
@@ -342,8 +361,8 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <!-- Start to Copy From Here -->
-                            
-                                <form action="">
+
+                                <form action="inc.process\product_purchase_process.php">
                                     <div class="col-lg-7">
                                         <div class="card">
                                             <div class="card-header">Purchase Information</div>
@@ -352,7 +371,7 @@
                                                     <h3 class="text-center title-2">Provide Information</h3>
                                                 </div>
                                                 <hr>
-                                                
+
                                                     <div class="row">
                                                         <div class="col-6">
                                                             <div class="form-group">
@@ -365,7 +384,7 @@
                                                         <div class="col-6">
                                                             <label for="dc_no" class="control-label mb-1">DC NO</label>
                                                             <div class="input-group">
-                                                                <input id="dc_no" name="dc_no" type="number" class="form-control cc-cvc" value="" data-val="true" 
+                                                                <input id="dc_no" name="dc_no" type="number" class="form-control cc-cvc" value="" data-val="true"
                                                                     autocomplete="off" data-val-required="Please enter DC Date">
 
                                                             </div>
@@ -375,7 +394,7 @@
                                                         <div class="col-6">
                                                             <div class="form-group">
                                                                 <label for="order_date" class="control-label mb-1">Order Date</label>
-                                                                <input id="order_date" name="order_date" type="date" class="form-control cc-exp" value="" data-val="true" 
+                                                                <input id="order_date" name="order_date" type="date" class="form-control cc-exp" value="" data-val="true"
                                                                     autocomplete="cc-exp" data-val-required="Please enter order Date">
                                                                 <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                                                             </div>
@@ -414,7 +433,12 @@
                                                     </thead>
                                                     <tbody class="input_fields_wrap">
                                                         <tr>
-                                                            <td ><input type="number" name="" class="pu-input"></td>
+                                                            <td >
+                                                                <select>
+                                                                    <option disabled="" selected="">Select page</option>
+                                                                    <option><?php echo fill_product_select_box($connect); ?></option>
+                                                                </select>
+                                                            </td>
                                                             <td><input type="number" name="" class="pu-input"></td>
                                                             <td><input type="number" name="" class="pu-input"></td>
                                                             <td><input type="number" name="" class="pu-input"></td>
@@ -442,7 +466,7 @@
                                         </div>
                                     </div>
                                 </form>
-                            
+
                         <!-- End the Copy From Here -->
                         <div class="row">
                             <div class="col-md-12">
@@ -482,7 +506,23 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
-    <script src="js/product_purchase.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      var wrapper       = $(".input_fields_wrap"); //Fields wrapper
+      var add_button      = $(".add_field_button"); //Add button ID
+
+      var x = 1; //initlal text box count
+      $(add_button).click(function(){ //on add input button click
+          x++; //text box increment
+          $(wrapper).append('<tr id="row'+x+'"><td><select><option disabled="" selected="">Select page</option><option><?php echo fill_product_select_box($connect); ?></option></select></td><td><input type="number" name="" class="pu-input"></td> <td><input type="number" name="" class="pu-input"></td><td><input type="number" name="" class="pu-input"></td><td><input type="number" name="" class="pu-input"></td><td><input type="number" name="" class="pu-input"></td><td><input type="number" name="" class="pu-input"></td><td><input type="number" name="" class="pu-input"></td><td><input type="number" name="" class="pu-input"></td><td colspan="2" style="padding-left: 0; padding-right: 30px;"><button class="btn btn-danger remove_field" id="'+x+'"><i class="fas fa-times"></i></button></td></tr>'); //add input box
+
+      });
+      $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+        var button_id = $(this).attr("id");
+        $("#row"+button_id+"").remove();
+        });
+    });
+    </script>
 
 
 </body>
