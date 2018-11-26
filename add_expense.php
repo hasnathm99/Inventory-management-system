@@ -346,46 +346,32 @@ require_once('include\db_connect.php');
                     <div class="container-fluid">
                         <!-- Start to Copy From Here -->
                             
-                                <form action="inc.process\add_product_process.php" method="POST">
+                                <form action="inc.process\add_expense_process.php" method="POST">
                                     <div class="col-lg-10">
                                 <div class="card">
-                                    <div class="card-header"><b>Product Information</b></div>
+                                    <div class="card-header"><b>Expense Information Form</b></div>
                                     <div class="card-body">
                                         <div class="card-title">
-                                            <h3 class="text-center title-2"> Add New Product</h3>
+                                            <h3 class="text-center title-2">Provide The Information</h3>
                                         </div>
                                         <hr>
-                                        
                                             <div class="form-group">
-                                                <label for="product_name" class="control-label mb-1">Product Name</label>
-                                                <input id="product_name" name="product_name" type="text" class="form-control" required="must fill product name" >
+                                                <label for="title" class="control-label mb-1">Title</label>
+                                                <input id="title" name="title" type="text" class="form-control" required="must fill a title" >
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="product_color" class="control-label mb-1">Product Color</label>
-                                                <input id="product_color" name="product_color" type="text" class="form-control " >
+                                                <label for="amount" class="control-label mb-1">Amount</label>
+                                                <input id="amount" name="amount" type="text" class="form-control " required="must fill amount">
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="product_gsm" class="control-label mb-1">GSM</label>
-                                                <input id="product_gsm" name="product_gsm" type="text" class="form-control " >
+                                                <label for="remarks" class="control-label mb-1">Remarks</label>
+                                                <input id="remarks" name="remarks" type="text" class="form-control " >
                                             </div>
                                             <div class="form-group">
-                                                <label for="product_thickness" class="control-label mb-1">Thickness</label>
-                                                <input id="product_thickness" name="product_thickness" type="text" class="form-control " >
+                                                <label for="date" class="control-label mb-1">Date</label>
+                                                <input id="date" name="date" type="date" class="form-control " required="enter date">
                                             </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="product_width" class="control-label mb-1">Width</label>
-                                                        <input id="product_width" name="product_width" type="text" class="form-control " placeholder="Width in Inch"  required="must fill product width">
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="product_height" class="control-label mb-1">Height</label>
-                                                    <div class="input-group">
-                                                        <input id="product_height" name="product_height" type="text" class="form-control " value="" placeholder="Height in Inch"  required="must fill product height">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                             <div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-lg btn-info btn-block">
                                                     <i class="fa fa-lock fa-lg"></i>&nbsp;
@@ -393,7 +379,6 @@ require_once('include\db_connect.php');
                                                     <span id="payment-button-sending" style="display:none;">Saving...</span>
                                                 </button>
                                             </div>
-                                        
                                     </div>
                                 </div>
                             </div>
