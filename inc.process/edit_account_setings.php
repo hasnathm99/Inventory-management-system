@@ -1,17 +1,10 @@
 <?php
-ob_start();
-session_start();
-
-if(!isset($_SESSION['user_id'])){
-  echo '<h2 style="color:#C9302C">Log in First<h2>';
-  header('Location: login.php');
-  
-  die();
-}
-
+require_once('db_connect.php');
+$id=$_GET['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -24,25 +17,25 @@ if(!isset($_SESSION['user_id'])){
     <title>Dashboard</title>
 
     <!-- Fontfaces CSS-->
-    <link href="css/font-face.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="../css/font-face.css" rel="stylesheet" media="all">
+    <link href="../vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link href="../vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="../vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="../vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="../vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="css/theme.css" rel="stylesheet" media="all">
+    <link href="../css/theme.css" rel="stylesheet" media="all">
 
 </head>
 
@@ -85,28 +78,27 @@ if(!isset($_SESSION['user_id'])){
                                 </li>
                             </ul> -->
                         </li>
-                        <li>
-                            <a href="chart.html">
-                                <i class="fas fa-chart-bar"></i>Product</a>
-                                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                        <li>
-                                            <a href="#">Add New Product</a>
-                                        </li>
-                                        <li>
-                                            <a href="index2.html">Product Report</a>
-                                        </li>
-                                        
-                                    </ul>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="add_product.html">Add new Product</a>
+                                </li>
+                                <li>
+                                    <a href="view_product.html">Product Report</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Stock</a>
                                     <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                         <li>
-                                            <a href="#">Add New Stock</a>
+                                            <a href="add_stock.html">Add New Stock</a>
                                         </li>
                                         <li>
-                                            <a href="index2.html">Stock Report</a>
+                                            <a href="view_stock.html">Stock Report</a>
                                         </li>
                                         
                                     </ul>
@@ -168,10 +160,10 @@ if(!isset($_SESSION['user_id'])){
                                 <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="add_product.php">Add new Product</a>
+                                    <a href="add_product.html">Add new Product</a>
                                 </li>
                                 <li>
-                                    <a href="view_product.php">Product Report</a>
+                                    <a href="view_product.html">Product Report</a>
                                 </li>
                             </ul>
                         </li>
@@ -179,21 +171,23 @@ if(!isset($_SESSION['user_id'])){
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-chart-bar"></i>Stock<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                
                                 <li>
-                                    <a href="view_stock.html">Stock Report</a>
+                                    <a href="login.html">Add new Stock</a>
+                                </li>
+                                <li>
+                                    <a href="register.html">Stock Report</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Purchase<i class="fas fa-caret-down caret"></i></a>
+                                <i class="fas fa-table"></i>Supplier<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="product_purchase.php">Product Purchase</a>
+                                    <a href="login.html">Add new Supplier</a>
                                 </li>
                                 <li>
-                                    <a href="purchase_report.html">Purchased Report</a>
+                                    <a href="register.html">Suppliers List</a>
                                 </li>
                             </ul>
                         </li>
@@ -202,10 +196,10 @@ if(!isset($_SESSION['user_id'])){
                                 <i class="far fa-check-square"></i>Sales<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="add_sales.html">Add Sales</a>
+                                    <a href="login.html">Add Sales</a>
                                 </li>
                                 <li>
-                                    <a href="sales_report.html">Sales Table</a>
+                                    <a href="register.html">Sales Table</a>
                                 </li>
                             </ul>
                         </li>
@@ -214,35 +208,17 @@ if(!isset($_SESSION['user_id'])){
                                 <i class="far fa-check-square"></i>Expense<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="daily_expense.html">Daily Expenses</a>
+                                    <a href="login.html">Add Expenses</a>
                                 </li>
                                 <li>
-                                    <a href="monthly_expense.html">Monthly Expenses</a>
-                                </li>
-                                <li>
-                                    <a href="expense_view.html">Expense View</a>
+                                    <a href="register.html">Expense Table</a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="far fa-check-square"></i>Loss/Profit<i class="fas fa-caret-down caret"></i></a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="#">Daily Basis</a>
-                                </li>
-                                <li>
-                                    <a href="#">Monthly Basis</a>
-                                </li>
-                                <li>
-                                    <a href="#">Yearly Basis</a>
-                                </li>
-                            </ul>
-                        </li>
-                       <!--  <li>
+                        <li>
                             <a href="#">
                                 <i class="fas fa-calendar-alt"></i>Reports</a>
-                        </li> -->
+                        </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Users<i class="fas fa-caret-down caret"></i></a>
@@ -321,7 +297,7 @@ if(!isset($_SESSION['user_id'])){
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="images/icon/download.png" alt="Sharif Stationary" />
+                                            <img src="../images/icon/download.png" alt="Sharif Stationary" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">Sharif Stationary</a>
@@ -330,7 +306,7 @@ if(!isset($_SESSION['user_id'])){
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="images/icon/download.png" alt="Sharif Stationary" />
+                                                        <img src="../images/icon/download.png" alt="Sharif Stationary" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -342,12 +318,17 @@ if(!isset($_SESSION['user_id'])){
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="include/account_setings.php">
+                                                    <a href="#">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>                                             
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
+                                                </div>
+                                                
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="include/logout.php">
+                                                <a href="#">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
@@ -364,89 +345,49 @@ if(!isset($_SESSION['user_id'])){
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">overview</h2>
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-25">
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>10368</h2>
-                                                <span>members online</span>
-                                            </div>
+                        <!-- Start to Copy From Here -->
+                            <?php
+                            $query1="select * from users where id=$id ";
+							$query1_run=mysqli_query($connect , $query1);
+							while($row=mysqli_fetch_array($query1_run)){
+								$name=$row['name'];
+								$password=$row['password'];
+								
+							}
+                            ?>
+                                <form action="edit_account_setings_func.php?id=<?php echo $id; ?>" method="POST">
+                                    <div class="col-lg-10">
+                                <div class="card">
+                                    <div class="card-header"><b>Edit User Information</b></div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="text-center title-2">Provide New Information</h3>
                                         </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
-                                        </div>
+                                        <hr>
+                                        <form action="" method="post" novalidate="novalidate">
+                                            <div class="form-group">
+                                                <label for="name" class="control-label mb-1">UserName</label>
+                                                <input id="name" name="name" type="text" class="form-control" value="<?php echo $name; ?>" >
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label for="password" class="control-label mb-1">User Password</label>
+                                                <input id="password" name="password" type="text" class="form-control " value="<?php echo $password; ?>">
+                                            </div>
+                                        
+                                            <div>
+                                                <button id="payment-button" type="submit" name="submit" class="btn btn-lg btn-info btn-block">
+                                                    <i class="fa fa-lock fa-lg"></i>&nbsp;
+                                                    <span id="payment-button-amount">Update</span>
+                                                    <span id="payment-button-sending" style="display:none;">Updating...</span>
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>388,688</h2>
-                                                <span>items solid</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c3">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>1,086</h2>
-                                                <span>this week</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c4">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>$1,060,386</h2>
-                                                <span>total earnings</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                </form>
+                            
+                        <!-- End the Copy From Here -->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
@@ -464,26 +405,26 @@ if(!isset($_SESSION['user_id'])){
     </div>
 
     <!-- Jquery JS-->
-    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <script src="../vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
-    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="../vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="../vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
+    <script src="../vendor/slick/slick.min.js">
     </script>
-    <script src="vendor/wow/wow.min.js"></script>
-    <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    <script src="../vendor/wow/wow.min.js"></script>
+    <script src="../vendor/animsition/animsition.min.js"></script>
+    <script src="../vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
     </script>
-    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
+    <script src="../vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="../vendor/counter-up/jquery.counterup.min.js">
     </script>
-    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="vendor/select2/select2.min.js">
+    <script src="../vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../vendor/select2/select2.min.js">
     </script>
 
     <!-- Main JS-->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 
 </body>
 
