@@ -5,7 +5,7 @@ $connect = new PDO("mysql:host=localhost;dbname=inventory_management_system", "r
 function fill_product_select_box($connect)
 {
  $output = '';
- $query = "SELECT id,product_name FROM product ";
+ $query = "SELECT * FROM product ";
  $statement = $connect->prepare($query);
  $statement->execute();
  $result = $statement->fetchAll();
@@ -362,8 +362,8 @@ function fill_product_select_box($connect)
                     <div class="container-fluid">
                         <!-- Start to Copy From Here -->
 
-                                <form action="inc.process\product_purchase_process.php">
-                                    <div class="col-lg-7">
+                                <form method="post" id="insert_purchase">
+                                    <!-- <div class="col-lg-7">
                                         <div class="card">
                                             <div class="card-header">Purchase Information</div>
                                             <div class="card-body">
@@ -410,13 +410,14 @@ function fill_product_select_box($connect)
                                                     </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="row m-t-30">
                                         <div class="col-md-12">
                                             <!-- DATA TABLE-->
                                             <div class="table-responsive m-b-40">
-                                                <table class="table table-borderless table-data3">
+                                                <span id="error"></span>
+                                                <table class="table table-borderless table-data3" id="purchase_table">
                                                     <thead>
                                                         <tr>
                                                             <th>Item Name</th>
@@ -433,20 +434,20 @@ function fill_product_select_box($connect)
                                                     </thead>
                                                     <tbody class="input_fields_wrap">
                                                         <tr>
-                                                            <td >
-                                                                <select>
-                                                                    <option disabled="" selected="">Select page</option>
-                                                                    <option><?php echo fill_product_select_box($connect); ?></option>
+                                                            <td>
+                                                                <select name="product_name[]" class="product_name">
+                                                                    <option disabled="" selected="" value="">Select page</option>
+                                                                    <?php echo fill_product_select_box($connect); ?>
                                                                 </select>
                                                             </td>
-                                                            <td><input type="number" name="" class="pu-input"></td>
-                                                            <td><input type="number" name="" class="pu-input"></td>
-                                                            <td><input type="number" name="" class="pu-input"></td>
-                                                            <td><input type="number" name="" class="pu-input"></td>
-                                                            <td><input type="number" name="" class="pu-input"></td>
-                                                            <td><input type="number" name="" class="pu-input"></td>
-                                                            <td><input type="number" name="" class="pu-input" class="pu-input"></td>
-                                                            <td><input type="number" name="" class="pu-input"></td>
+                                                            <td><input type="number" name="mt_quantity[]" class="pu-input mt_quantity"></td>
+                                                            <td><input type="number" name="ream_quantity[]" class="pu-input ream_quantity"></td>
+                                                            <td><input type="number" name="unit_price[]" class="pu-input unit_price"></td>
+                                                            <td><input type="number" name="discount_MT[]" class="pu-input discount_MT"></td>
+                                                            <td><input type="number" name="total_discount[]" class="pu-input total_discount"></td>
+                                                            <td><input type="number" name="vat[]" class="pu-input vat"></td>
+                                                            <td><input type="number" name=" total_vat[]" class="pu-input total_vat" class="pu-input"></td>
+                                                            <td><input type="number" name="total_amount[]" class="pu-input total_amount"></td>
                                                             <td colspan="2" style="padding-left: 0; padding-right: 30px;">
                                                                 <button type="button" class="btn btn-primary add_field_button">
                                                                     <i class="fas fa-plus-circle"></i></button>
@@ -456,10 +457,14 @@ function fill_product_select_box($connect)
                                                 </table>
                                             </div>
                                             <div>
-                                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                                    <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                                    <span id="payment-button-amount">Pay $100.00</span>
-                                                    <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                                <button id="submit_button" name="submit" type="submit" class="btn btn-md btn-primary">
+                                                    <i class="fas fa-step-forward"></i>&nbsp;
+                                                    <span id="">Submit</span>
+                                                </button>
+                                                <button id="reset_button" name="reset" type="submit" class="btn btn-md btn-danger">
+                                                    <i class="fas fa-sync-alt"></i>&nbsp;
+                                                    <span id="">Reset</span>
+                                                    <span id="" style="display:none;">Sending…</span>
                                                 </button>
                                             </div>
                                             <!-- END DATA TABLE-->
@@ -521,6 +526,115 @@ function fill_product_select_box($connect)
         var button_id = $(this).attr("id");
         $("#row"+button_id+"").remove();
         });
+      $('#insert_purchase').on('submit', function(e){
+       e.preventDefault();
+       var error = '';
+       $('.unit_name').each(function(){
+        var count = 1;
+        if($(this).val() == '')
+        {
+         error += "<p>Enter Item Name at "+count+" p_name</p>";
+         return false;
+        }
+        count = count + 1;
+       });
+       
+       $('.mt_quantity').each(function(){
+        var count = 1;
+        if($(this).val() == '')
+        {
+         error += "<p>Enter Item Quantity at "+count+" mt</p>";
+         return false;
+        }
+        count = count + 1;
+       });
+       
+       $('.ream_quantity').each(function(){
+        var count = 1;
+        if($(this).val() == '')
+        {
+         error += "<p>Select Unit at "+count+" ream</p>";
+         return false;
+        }
+        count = count + 1;
+       });
+       $('.unit_price').each(function(){
+        var count = 1;
+        if($(this).val() == '')
+        {
+         error += "<p>Select Unit at "+count+" unit</p>";
+         return false;
+        }
+        count = count + 1;
+       });
+       $('.discount_MT').each(function(){
+        var count = 1;
+        if($(this).val() == '')
+        {
+         error += "<p>Select Unit at "+count+" dis_mt</p>";
+         return false;
+        }
+        count = count + 1;
+       });
+       $('.total_discount').each(function(){
+        var count = 1;
+        if($(this).val() == '')
+        {
+         error += "<p>Select Unit at "+count+" t_dis</p>";
+         return false;
+        }
+        count = count + 1;
+       });
+       $('.vat').each(function(){
+        var count = 1;
+        if($(this).val() == '')
+        {
+         error += "<p>Select Unit at "+count+" vat</p>";
+         return false;
+        }
+        count = count + 1;
+       });
+       $('.total_vat').each(function(){
+        var count = 1;
+        if($(this).val() == '')
+        {
+         error += "<p>Select Unit at "+count+" t_vat</p>";
+         return false;
+        }
+        count = count + 1;
+       });
+       $('.total_amount').each(function(){
+        var count = 1;
+        if($(this).val() == '')
+        {
+         error += "<p>Select Unit at "+count+" t_amount</p>";
+         return false;
+        }
+        count = count + 1;
+       });
+
+       var form_data = $(this).serialize();
+       if(error == '')
+       {
+        $.ajax({
+         url:"inc.process/add_purchase_process.php",
+         method:"POST",
+         data:form_data,
+         success:function(data)
+         {
+          if(data == 'ok')
+          {
+           $('#purchase_table').find("tr:gt(0)").remove();
+           $('#error').html('<div class="alert alert-success">Item Details Saved</div>');
+          }
+         }
+        });
+       }
+       else
+       {
+        $('#error').html('<div class="alert alert-danger">'+error+'</div>');
+       }
+      });
     });
     </script>
 
