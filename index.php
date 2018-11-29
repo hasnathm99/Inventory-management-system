@@ -193,7 +193,7 @@ if(!isset($_SESSION['user_id'])){
                                     <a href="product_purchase.php">Product Purchase</a>
                                 </li>
                                 <li>
-                                    <a href="purchase_report.html">Purchased Report</a>
+                                    <a href="purchase_report.php">Purchased Report</a>
                                 </li>
                             </ul>
                         </li>
@@ -202,7 +202,7 @@ if(!isset($_SESSION['user_id'])){
                                 <i class="far fa-check-square"></i>Sales<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="add_sales.html">Add Sales</a>
+                                    <a href="add_sales.php">Add Sales</a>
                                 </li>
                                 <li>
                                     <a href="sales_report.html">Sales Table</a>

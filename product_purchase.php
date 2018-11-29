@@ -591,7 +591,7 @@ $(document).ready(function(){
  $(document).on('click', '.add', function(){
   var html = '';
   html += '<tbody><tr>';
-  html += '<td><select name="product_name[]" class="pu-input product_name"><option value="">Select Unit</option><?php echo fill_unit_select_box($connect); ?></select></td>';
+  html += '<td><select name="product_name[]" class="pu-input product_name"><option value="">--Select--</option><?php echo fill_unit_select_box($connect); ?></select></td>';
   html += '<td><input type="text" name="mt[]" class="pu-input mt" /></td>';
   html += '<td><input type="text" name="ream[]" class="pu-input ream"></td>';
   html += '<td><input type="text" name="unit_price[]" class="pu-input unit_price"></td>';
