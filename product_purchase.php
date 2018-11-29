@@ -489,8 +489,9 @@ function fill_unit_select_box($connect)
                                             </div>
                                         </div>
                                     </div>
-                                            <table class="table table-borderless table-data3" id="item_table">
 
+                                            <table class="table table-borderless table-data3" id="item_table">
+                                                <button type="button" name="add" class="btn btn-success btn-sm add" style="margin-bottom: 5px;"><i class="fas fa-plus"></i>  Add Row</button>
                                                 <thead>
                                                     <tr>
                                                         <th>Product Name</th>
@@ -502,7 +503,7 @@ function fill_unit_select_box($connect)
                                                         <th>Vat</th>
                                                         <th>Total Vat</th>
                                                         <th>Total</th>
-                                                        <th><button type="button" name="add" class="btn btn-success btn-sm add"><span class="glyphicon glyphicon-plus"></span></button></th>
+                                                        <th></th>
                                                         
                                                     </tr>
                                                 </thead>
