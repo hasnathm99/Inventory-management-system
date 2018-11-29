@@ -362,11 +362,32 @@ require_once('include\db_connect.php');
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
+                                             <?php
                                                 $counter=0;
-                                                
+
+                                                $result_per_page=10;
                                                 $query="select * from product";
                                                 $query_run=mysqli_query($connect, $query);
+                                                $number_of_result=mysqli_num_rows($query_run);
+                                                $number_of_page=ceil($number_of_result/$result_per_page);
+                                                if(!isset($_GET['page'])){ 
+                                                    $page=1;
+                                                }else{
+                                                    $page=$_GET['page'];
+                                                }
+
+                                                $starting_limit_num=($page-1)*$result_per_page;
+                                                $query="select * from product limit " .$starting_limit_num.",".$result_per_page;
+                                                $query_run=mysqli_query($connect , $query);
+
+                                                
+                                                for($page=1;$page<=$number_of_page;$page++){
+                                                // echo 
+                                                echo '<a href="view_product.php?page=' .$page.' "><button class="btn btn-success" style="margin-right:1px">'. $page . '</button></a> ';
+                                                 }
+                                                
+                                                // $query="select * from product";
+                                                // $query_run=mysqli_query($connect, $query);
                                                 while($row=mysqli_fetch_array($query_run)){
                                                     $counter++;
 
@@ -382,12 +403,17 @@ require_once('include\db_connect.php');
 
                                                 <td><a href="inc.process/delete_product.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" onclick=" return confirm('Sure you want to delete???');" >Delete</button></a></td>
                                                 
-                                            <?php } ?>
+
+                                            <?php  
+                                            } ?>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <!-- END DATA TABLE-->
+                                <?php
+
+                                ?>
                             </div>
                         </div>
 
