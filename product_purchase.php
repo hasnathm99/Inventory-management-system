@@ -507,6 +507,9 @@ function fill_unit_select_box($connect)
                                                         
                                                     </tr>
                                                 </thead>
+                                                <tbody>
+                                                    
+                                                </tbody>
                                                 <!-- <tbody class="input_fields_wrap">
                                                     <tr>
                                                         <td ><input type="number" name="" class="pu-input"></td>
@@ -575,7 +578,7 @@ function fill_unit_select_box($connect)
     <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="vendor/select2/select2.min.js">
     </script>
-
+    <script src="vendor/angularjs/angular.min.js"></script>
     <!-- Main JS-->
     <script src="js/main.js"></script>
     
@@ -590,23 +593,68 @@ $(document).ready(function(){
  
  $(document).on('click', '.add', function(){
   var html = '';
-  html += '<tbody><tr>';
+  html += '<tr>';
   html += '<td><select name="product_name[]" class="pu-input product_name"><option value="">--Select--</option><?php echo fill_unit_select_box($connect); ?></select></td>';
-  html += '<td><input type="text" name="mt[]" class="pu-input mt" /></td>';
+  html += '<td><input type="text" name="mt[]" class="pu-input mt" id="mt"/></td>';
   html += '<td><input type="text" name="ream[]" class="pu-input ream"></td>';
-  html += '<td><input type="text" name="unit_price[]" class="pu-input unit_price"></td>';
-  html += '<td><input type="text" name="d_price[]" class="pu-input d_price"></td>';
-  html += '<td><input type="text" name="td_price[]" class="pu-input td_price"></td>';
-  html += '<td><input type="text" name="vat[]" class="pu-input vat"></td>';
-  html += '<td><input type="text" name="t_vat[]" class="pu-input t_vat"></td>';
-  html += '<td><input type="text" name="total[]" class="pu-input total"></td>';
-  html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><i class="fas fa-minus"></i></span></button></td></tr></tbody>';
-  $('#item_table').append(html);
+  html += '<td><input type="text" name="unit_price[]" class="pu-input unit_price" id="price"></td>';
+  html += '<td><input type="text" name="d_price[]" class="pu-input d_price" id="discount"></td>';
+  html += '<td><input type="number" name="td_price[]" class="pu-input td_price" id="total_dis"></td>';
+  html += '<td><input type="text" name="vat[]" class="pu-input vat" id="vat"></td>';
+  html += '<td><input type="text" name="t_vat[]" class="pu-input t_vat" id="t_vat"></td>';
+  html += '<td><input type="text" name="total[]" class="pu-input total" id="total"></td>';
+  html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span><i class="fas fa-minus"></i></span></button></td></tr>';
+$('#item_table').append(html);
+// $('tr').each(function(){
+//     $('input').keyup(function(){ // run anytime the value changes
+//         var mt  = Number($('#mt').val());   // get value of field
+//         var price = Number($('#price').val()); // convert it to a float
+//         var discount = Number($('#discount').val());
+//         var vat = Number($('#vat').val());
+        
+//         document.getElementById('total').value = mt * price;
+//         document.getElementById('total_dis').value = mt * discount;
+//         document.getElementById('t_vat').value = mt * vat;
+//     // add them and output it
+//     });
+// });
+
+
  });
- 
- $(document).on('click', '.remove', function(){
-  $(this).closest('tr').remove();
- });
+
+//  $(document).on('click', '.remove', function(){
+//   $(this).closest('tr').remove();
+//  });
+
+// $('#item_table').on("keyup", "input", function() { // run anytime any value changes
+//   // locate parent row relative to the input that was typed in
+//   var row = $(this).closest('tr');
+
+//   // locate mt and so on within the row by class - don't need id
+//   var mt = Number(row.find('.mt').val()); 
+//   var price = Number(row.find('.price').val());
+//   var discount = Number(row.find('.discount').val());
+//   var vat = Number(row.find('.vat').val());
+
+//   // output, again find the fields by class
+//   row.find('.total').val(mt * price);
+//   row.find('.d_price').val(mt * discount);
+//   // etc
+
+//   });
+$('table').on('keyup', 'input', function(){ // run anytime the value changes
+    $thisRow = $(this).parent().parent();console.log($thisRow.find('td>.total'));
+    var mt  = Number($thisRow.find('td>.mt').val());   // get value of field
+    var price = Number($thisRow.find('td>.unit_price').val()); // convert it to a float
+    var discount = Number($thisRow.find('td>.d_price').val());
+    var vat = Number($thisRow.find('td>.vat').val());
+
+    $thisRow.find('td>.total').val(mt * price);
+    $thisRow.find('td>.td_price').val(mt * discount);
+    $thisRow.find('td>.t_vat').val(mt * vat);
+   // add them and output it
+  });
+
  
  $('#insert_form').on('submit', function(event){
   event.preventDefault();
@@ -664,6 +712,10 @@ $(document).ready(function(){
    $('#error').html('<div class="alert alert-danger">'+error+'</div>');
   }
  });
- 
+    
+
 });
+
+
+
 </script>
