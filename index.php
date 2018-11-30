@@ -181,7 +181,7 @@ if(!isset($_SESSION['user_id'])){
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 
                                 <li>
-                                    <a href="view_stock.html">Stock Report</a>
+                                    <a href="view_stock.php">Stock Report</a>
                                 </li>
                             </ul>
                         </li>

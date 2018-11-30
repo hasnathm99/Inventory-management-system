@@ -1,3 +1,6 @@
+<?php
+require_once('include\db_connect.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -354,81 +357,76 @@
                                                 <th>SL NO</th>
                                                 <th>Product Name</th>
                                                 <th>Product Size</th>
-                                                <th>Color</th>
-                                                <th>MT</th>
-                                                <th>Ream</th>
+                                                <th>Total Ream</th>
+                                                <th>Toatl MT</th>
+                                                <!-- <th colspan="2" style="text-align: center;">Action</th> -->                               
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>001</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td>55 GSM 23" x 36"</td>
-                                                <td class="process">Yellow</td>
-                                                <td>10000</td>
-                                                <td>12345</td>
+                                             <?php
+                                                $counter=0;
+
+                                                $result_per_page=5;
+                                                $query="select * from product";
+                                                $query_run=mysqli_query($connect, $query);
+                                                $number_of_result=mysqli_num_rows($query_run);
+                                                $number_of_page=ceil($number_of_result/$result_per_page);
+                                                if(!isset($_GET['page'])){ 
+                                                    $page=1;
+                                                }else{
+                                                    $page=$_GET['page'];
+                                                }
+
+                                                $starting_limit_num=($page-1)*$result_per_page;
+
+                                                //from product table name and size
+                                                $query="select * from product limit " .$starting_limit_num.",".$result_per_page;
+                                                $query_run=mysqli_query($connect , $query);
+
                                                 
-                                            </tr>
+                                                for($page=1;$page<=$number_of_page;$page++){
+                                                // echo 
+                                                echo '<a href="view_product.php?page=' .$page.' "><button class="btn btn-success" style="margin-right:1px">'. $page . '</button></a> ';
+                                                 }
+                                                
+
+
+                                                while($row=mysqli_fetch_array($query_run)){
+                                                    $counter++;
+
+                                                ?>
                                             <tr>
-                                                <td>001</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td>55 GSM 23" x 36"</td>
-                                                <td class="process">Yellow</td>
-                                                <td>10000</td>
-                                                <td>12345</td>
-                                            </tr>
-                                            <tr>
-                                                <td>002</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td> 20" x 46"</td>
-                                                <td class="process">Yellow</td>
-                                                <td>10000</td>
-                                                <td>12345</td>
-                                            </tr>
-                                            <tr>
-                                                <td>003</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td>34 GSM 23" x 32"</td>
-                                                <td class="process">Yellow</td>
-                                                <td>10000</td>
-                                                <td>12345</td>
-                                            </tr>
-                                            <tr>
-                                                <td>004</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td> 23" x 35"</td>
-                                                <td class="process">Yellow</td>
-                                                <td>10000</td>
-                                                <td>12345</td>
-                                            </tr>
-                                            <tr>
-                                                <td>005</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td>29 GSM 23" x 36"</td>
-                                                <td class="process">Yellow</td>
-                                                <td>10000</td>
-                                                <td>12345</td>
-                                            </tr>
-                                            <tr>
-                                                <td>006</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td>55 GSM 23" x 16"</td>
-                                                <td class="process">Yellow</td>
-                                                <td>10000</td>
-                                                <td>12345</td>
-                                            </tr>
-                                            <tr>
-                                                <td>001</td>
-                                                <td>Vitol Pronting Paper</td>
-                                                <td>55 GSM 23" x 36"</td>
-                                                <td class="process">Yellow</td>
-                                                <td>10000</td>
-                                                <td>12345</td>   
+
+                                                <td><?php echo $counter; ?></td>
+                                                <td><?php echo $row['product_name']; ?></td>
+                                                <td><?php echo $row['product_gsm'].' GSM  '.$row['product_width'].'" X '. $row['product_height'].'"' ; ?></td>
+                                                <td><?php echo $row['product_color']; ?></td>
+                                                <?php
+                                                $queryx="select sum(mt), sum(ream) from purchase where product_name='a4' ";
+                                                $queryx_run=mysqli_query($connect, $queryx);
+                                                while($row=mysqli_fetch_array($queryx_run)){
+                                                $sumation1=$row['sum(mt)'];
+                                                $sumation2=$row['sum(ream)'];
+                                                }
+                                            
+                                                ?>
+                                                <td><?php echo $sumation1 ?></td>
+                                                <td><?php echo $sumation2 ?></td>
+                                                <!-- <td><a href="inc.process\edit_product_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
+
+                                                <td><a href="inc.process/delete_product.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" onclick=" return confirm('Sure you want to delete???');" >Delete</button></a></td>  -->
+                                                
+
+                                            <?php  
+                                            } ?>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <!-- END DATA TABLE-->
+                                <?php
+
+                                ?>
                             </div>
                         </div>
 
