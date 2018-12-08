@@ -347,7 +347,13 @@ $id=$_GET['id'];
                     <div class="container-fluid">
                         <!-- Start to Copy From Here -->
                             <?php
-                            echo $id;
+                            
+                            $query="select * from product where product_name='$id' ";
+                            $query_run=mysqli_query($connect , $query);
+                            while($row=mysqli_fetch_array($query_run)){
+                                $unit_price=$row['unit_price'];
+
+                            
                             
                             ?>
                                 <form action="edit_product_process_func.php?id=<?php echo $id; ?>" method="POST">
@@ -361,15 +367,19 @@ $id=$_GET['id'];
                                         <hr>
                                             <div class="form-group has-success">
                                                 <label for="present_unit_price" class="control-label mb-1">Present Unit Price</label>
-                                                <input id="present_unit_price" name="present_unit_price" type="text" class="form-control " value="<?php  ?>" disabled>
+                                                <input id="present_unit_price" name="present_unit_price" type="text" class="form-control " placeholder="<?php echo $unit_price ?>" disabled >
                                             </div>
                                             <div class="form-group">
-                                                <label for="product_thickness" class="control-label mb-1">Plus/Minus</label>
-                                                <input id="product_thickness" name="product_thickness" type="text" class="form-control " value="<?php  ?>">
+                                                <label for="product_thickness" class="control-label mb-1">Action</label>
+                                                <select>
+                                                    <option value="">Plus</option>
+                                                    <option value="">Minus</option>
+                                                    
+                                                </select>
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="present_unit_price" class="control-label mb-1">Updated Unit Price</label>
-                                                <input id="present_unit_price" name="present_unit_price" type="text" class="form-control " value="<?php  ?>">
+                                                <label for="update_unit_price" class="control-label mb-1">Updated Unit Price</label>
+                                                <input id="update_unit_price" name="update_unit_price" type="text" class="form-control " value="<?php  ?>">
                                             </div>
                                             
                                             <div>
@@ -383,6 +393,7 @@ $id=$_GET['id'];
                                     </div>
                                 </div>
                             </div>
+                        <?php } ?>
                                 </form>
                             
                         <!-- End the Copy From Here -->
