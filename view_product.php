@@ -21,7 +21,7 @@ require_once('include\db_connect.php');
                                                 <th>SL NO</th>
                                                 <th>Product Name</th>
                                                 <th>Product Size</th>
-                                                <th>Product Color</th>
+                                                <th>Unit Price</th>
                                                 <th colspan="2" style="text-align: center;">Action</th>                               
                                             </tr>
                                         </thead>
@@ -29,7 +29,7 @@ require_once('include\db_connect.php');
                                              <?php
                                                 $counter=0;
 
-                                                $result_per_page=10;
+                                                $result_per_page=5;
                                                 $query="select * from product";
                                                 $query_run=mysqli_query($connect, $query);
                                                 $number_of_result=mysqli_num_rows($query_run);
@@ -39,6 +39,7 @@ require_once('include\db_connect.php');
                                                 }else{
                                                     $page=$_GET['page'];
                                                 }
+                                                echo 'You are on Page <b>'. $page.'</b><br>';
 
                                                 $starting_limit_num=($page-1)*$result_per_page;
                                                 $query="select * from product limit " .$starting_limit_num.",".$result_per_page;
@@ -47,7 +48,7 @@ require_once('include\db_connect.php');
                                                 
                                                 for($page=1;$page<=$number_of_page;$page++){
                                                 // echo 
-                                                echo '<a href="view_product.php?page=' .$page.' "><button class="btn btn-success" style="margin-right:1px">'. $page . '</button></a> ';
+                                                echo '<a href="view_product.php?page=' .$page.' ">'. $page . '</a> ';
                                                  }
                                                 
                                                 // $query="select * from product";
@@ -61,7 +62,7 @@ require_once('include\db_connect.php');
                                                 <td><?php echo $counter; ?></td>
                                                 <td><?php echo $row['product_name']; ?></td>
                                                 <td><?php echo $row['product_gsm'].' GSM  '.$row['product_width'].'" X '. $row['product_height'].'"' ; ?></td>
-                                                <td><?php echo $row['product_color']; ?></td>
+                                                <td><?php echo $row['unit_price']; ?> tk</td>
 
                                                 <td><a href="inc.process\edit_product_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
 
@@ -94,9 +95,7 @@ require_once('include\db_connect.php');
             </div>
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
-        </div>
 
-    </div>
 
     <?php require 'include/footer.php' ?>
 <!-- end document-->

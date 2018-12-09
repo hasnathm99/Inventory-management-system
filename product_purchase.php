@@ -100,13 +100,7 @@ function fill_unit_select_box($connect)
                                                         <td></td>
                                                         
                                                     </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td><input type="number" name="" class="subt1" value="" placeholder="Total Ream" readonly=""></td>
-                                                        <td></td>
-                                                    </tr>
+                                                    
                                                 </tfoot>
                                                 
                                             </table>
@@ -155,9 +149,6 @@ $(document).ready(function(){
   html += '<td><input type="text" name="total[]" class="pu-input total"></td>';
   html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span><i class="fas fa-minus"></i></span></button></td></tr>';
 $('#item_table').append(html);
-
-
-
  });
 
  $(document).on('click', '.remove', function(){
@@ -169,23 +160,10 @@ $('table').on('keyup', 'input', function(){ // run anytime the value changes
     $thisRow = $(this).parent().parent();console.log($thisRow.find('td>.total'));
     var ream  = Number($thisRow.find('td>.ream').val());   // get value of field
     var price = Number($thisRow.find('td>.unit_price').val()); // convert it to a float
-    var discount = Number($thisRow.find('td>.d_price').val());
-    var vat = Number($thisRow.find('td>.vat').val());
 
     $thisRow.find('td>.total').val(ream * price);
-    $thisRow.find('td>.td_price').val(mt * discount);
-    $thisRow.find('td>.t_vat').val(mt * vat);
-   // add them and output it
-  });
 
-// Subtotal of values mt
-$(document).on("change", ".mt", function() {
-    var sum = 0;
-    $(".mt").each(function(){
-        sum += +$(this).val();
-    });
-    $(".t_mt").val(sum);
-});
+  });
 // Subtotal of values ream
 $(document).on("change", ".ream", function() {
     var sum = 0;
@@ -194,14 +172,7 @@ $(document).on("change", ".ream", function() {
     });
     $(".t_ream").val(sum);
 });
-// Subtotal of values discount
-$(document).on("change", ".td_price", function() {
-    var sum = 0;
-    $(".td_price").each(function(){
-        sum += +$(this).val();
-    });
-    $(".st_dis").val(sum);
-});
+
 // Subtotal of values total
 $(document).on("change", ".total", function() {
     var sum = 0;

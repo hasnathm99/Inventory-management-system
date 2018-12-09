@@ -11,9 +11,7 @@ if(!isset($_SESSION['user_id'])){
 
 ?>
 
-
 <?php $currentPage = 'dashboard'; include 'include/header.php'; ?>
->>>>>>> 6e5e26c3c952536f01f35079911cb890bc8dded3
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->

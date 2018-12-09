@@ -12,7 +12,7 @@ if(isset($_POST['submit'])){
     $product_name=test_input($_POST['product_name']);
     $product_color=test_input($_POST['product_color']);
     $product_gsm=test_input($_POST['product_gsm']);
-    $product_thickness=test_input($_POST['product_thickness']);
+    $unit_price=test_input($_POST['unit_price']);
     $product_width=test_input($_POST['product_width']);
     $product_height=test_input($_POST['product_height']);
 
@@ -20,7 +20,7 @@ if(isset($_POST['submit'])){
     			product_name='$product_name' , 
     			product_color='$product_color' ,
     			product_gsm= '$product_gsm' ,
-    			product_thickness='$product_thickness' , 
+    			unit_price='$unit_price' , 
     			product_width = '$product_width' , 
     			product_height = '$product_height' where id='$edit_id' ";
     $query_run=mysqli_query($connect, $query);

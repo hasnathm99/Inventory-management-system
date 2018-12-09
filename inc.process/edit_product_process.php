@@ -63,20 +63,7 @@ $id=$_GET['id'];
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                            <!-- <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="index.html">Dashboard 1</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="index3.html">Dashboard 3</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">Dashboard 4</a>
-                                </li>
-                            </ul> -->
+                            
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
@@ -100,7 +87,6 @@ $id=$_GET['id'];
                                         <li>
                                             <a href="view_stock.html">Stock Report</a>
                                         </li>
-                                        
                                     </ul>
                         </li>
                         <li>
@@ -353,7 +339,7 @@ $id=$_GET['id'];
 								$product_name=$row['product_name'];
 								$product_color=$row['product_color'];
 								$product_gsm=$row['product_gsm'];
-								$product_thickness=$row['product_thickness'];
+								$unit_price=$row['unit_price'];
 								$product_width=$row['product_width'];
 								$product_height=$row['product_height'];
 							}
@@ -381,8 +367,8 @@ $id=$_GET['id'];
                                                 <input id="product_gsm" name="product_gsm" type="text" class="form-control " value="<?php echo $product_gsm; ?>">
                                             </div>
                                             <div class="form-group">
-                                                <label for="product_thickness" class="control-label mb-1">Thickness</label>
-                                                <input id="product_thickness" name="product_thickness" type="text" class="form-control " value="<?php echo $product_thickness; ?>">
+                                                <label for="unit_price" class="control-label mb-1">Unit Price</label>
+                                                <input id="unit_price" name="unit_price" type="text" class="form-control " value="<?php echo $unit_price; ?>">
                                             </div>
                                             <div class="row">
                                                 <div class="col-6">
