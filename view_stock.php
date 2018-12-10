@@ -101,9 +101,7 @@ require_once('include\db_connect.php');
             </div>
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
-        </div>
 
-    </div>
 
     <?php require 'include/footer.php' ?>
 <!-- end document-->
