@@ -21,22 +21,20 @@ require_once('include\db_connect.php');
                                         
                                         <thead>
                                             <tr>
-                                                <th>SL NO</th>
+                                                <th >SL NO</th>
                                                 <th>Company Name</th>
                                                 <th>Product Name</th>
-                                                <th>Sales Unit Price</th>
-                                                <th>Sales Ream</th>
+                                                <th>Purchase Unit Price</th>
+                                                <th>Purchase Ream</th>
                                                 <th>Total Amount</th>
-                                                <th>Actual Unit Price</th>
-                                                <th>Profit/Loss</th>
-                                                <th>Sales Date</th>
+                                                <th>Purchase Date</th>
                                                 <th colspan="2" style="text-align: center;">Action</th>                               
                                             </tr>
                                         </thead>
                                         <?php
                                                 $counter=0;
 
-                                                $result_per_page=10;
+                                                $result_per_page=5;
                                                 $query="select * from purchase";
                                                 $query_run=mysqli_query($connect, $query);
                                                 $number_of_result=mysqli_num_rows($query_run);
@@ -46,7 +44,7 @@ require_once('include\db_connect.php');
                                                 }else{
                                                     $page=$_GET['page'];
                                                 }
-                                                echo 'You are on Page '.$page.'<br>';
+                                                echo 'You are on Page <b>'.$page.'</b><br>';
 
                                                 $starting_limit_num=($page-1)*$result_per_page;
                                                 $query="select * from purchase limit " .$starting_limit_num.",".$result_per_page;
@@ -68,17 +66,14 @@ require_once('include\db_connect.php');
                                              
                                             <tr>
 
-                                                <td style="min-width: 20px"><?php echo $counter; ?></td>
+                                                <td ><?php echo $counter; ?></td>
                                                 <td><?php echo $row['company_name']; ?></td>
                                                 <td><?php echo $row['product_name']; ?></td>
-                                                
                                                 <td><?php echo $row['unit_price']; ?></td>
                                                 <td><?php echo $row['ream']; ?></td>
                                                 <td><?php echo $row['total']; ?></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td style="min-width: 200px"><?php echo date("jS F, Y", strtotime($row['dc_date']));?></td>
-                                                <td><a href="inc.process\edit_product_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
+                                                <td ><?php echo date("d-m-Y", strtotime($row['dc_date']));?></td>
+                                                <td><a href="inc.process\edit_purchase_report_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
 
                                                 <td><a href="inc.process/delete_product.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" onclick=" return confirm('Sure you want to delete???');" >Delete</button></a></td>
                                                 
