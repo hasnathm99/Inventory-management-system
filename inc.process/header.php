@@ -1,20 +1,5 @@
-<?php
-ob_start();
-session_start();
-if(!isset($_SESSION['user_id'])){
-  echo '<h2 style="color:#C9302C">Log in First<h2>';
-  header('Location:../login.php');
-  
-  die();
-}
-require_once('db_connect.php');
-$query="select * from users";
-$query_run=mysqli_query($connect , $query);
-
-?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -24,7 +9,7 @@ $query_run=mysqli_query($connect , $query);
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Sharif Stationary</title>
 
     <!-- Fontfaces CSS-->
     <link href="../css/font-face.css" rel="stylesheet" media="all">
@@ -73,42 +58,30 @@ $query_run=mysqli_query($connect , $query);
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                            <!-- <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="index.html">Dashboard 1</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="index3.html">Dashboard 3</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">Dashboard 4</a>
-                                </li>
-                            </ul> -->
+                            
                         </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="add_product.html">Add new Product</a>
-                                </li>
-                                <li>
-                                    <a href="view_product.html">Product Report</a>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="chart.html">
+                                <i class="fas fa-chart-bar"></i>Product</a>
+                                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                        <li>
+                                            <a href="#">Add New Product</a>
+                                        </li>
+                                        <li>
+                                            <a href="index2.html">Product Report</a>
+                                        </li>
+                                        
+                                    </ul>
                         </li>
                         <li>
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Stock</a>
                                     <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                         <li>
-                                            <a href="add_stock.html">Add New Stock</a>
+                                            <a href="#">Add New Stock</a>
                                         </li>
                                         <li>
-                                            <a href="view_stock.html">Stock Report</a>
+                                            <a href="index2.html">Stock Report</a>
                                         </li>
                                         
                                     </ul>
@@ -154,15 +127,15 @@ $query_run=mysqli_query($connect , $query);
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
+                <a href="index.php">
                     <h3>Sharif Stationary</h3>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="#">
+                        <li class=" has-sub">
+                            <a class="<?php if($currentPage =='dashboard'){echo 'active';}?>js-arrow" href="../index.php">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li class="has-sub">
@@ -170,10 +143,10 @@ $query_run=mysqli_query($connect , $query);
                                 <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="add_product.html">Add new Product</a>
+                                    <a href="../add_product.php" class="<?php if($currentPage =='add_product'){echo 'active';}?>">Add new Product</a>
                                 </li>
                                 <li>
-                                    <a href="view_product.html">Product Report</a>
+                                    <a href="../view_product.php" class="<?php if($currentPage =='product_report'){echo 'active';}?>">Product Report</a>
                                 </li>
                             </ul>
                         </li>
@@ -181,23 +154,21 @@ $query_run=mysqli_query($connect , $query);
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-chart-bar"></i>Stock<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                
                                 <li>
-                                    <a href="login.html">Add new Stock</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Stock Report</a>
+                                    <a href="../view_stock.php">Stock Report</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Supplier<i class="fas fa-caret-down caret"></i></a>
+                                <i class="fas fa-table"></i>Purchase<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="login.html">Add new Supplier</a>
+                                    <a href="../product_purchase.php">Product Purchase</a>
                                 </li>
                                 <li>
-                                    <a href="register.html">Suppliers List</a>
+                                    <a href="../purchase_report.php">Purchased Report</a>
                                 </li>
                             </ul>
                         </li>
@@ -206,10 +177,10 @@ $query_run=mysqli_query($connect , $query);
                                 <i class="far fa-check-square"></i>Sales<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="login.html">Add Sales</a>
+                                    <a href="../add_sales.php">Add Sales</a>
                                 </li>
                                 <li>
-                                    <a href="register.html">Sales Table</a>
+                                    <a href="../sales_report.php">Sales Table</a>
                                 </li>
                             </ul>
                         </li>
@@ -218,26 +189,41 @@ $query_run=mysqli_query($connect , $query);
                                 <i class="far fa-check-square"></i>Expense<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="login.html">Add Expenses</a>
+                                    <a href="../add_expense.php">Expenses</a>
                                 </li>
                                 <li>
-                                    <a href="register.html">Expense Table</a>
+                                    <a href="../view_expense.php">Expense Report</a>
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="far fa-check-square"></i>Loss/Profit<i class="fas fa-caret-down caret"></i></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="#">Daily Basis</a>
+                                </li>
+                                <li>
+                                    <a href="#">Monthly Basis</a>
+                                </li>
+                                <li>
+                                    <a href="#">Yearly Basis</a>
+                                </li>
+                            </ul>
+                        </li>
+                       <!--  <li>
                             <a href="#">
                                 <i class="fas fa-calendar-alt"></i>Reports</a>
-                        </li>
+                        </li> -->
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Users<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="login.html">Add New Users</a>
+                                    <a href="../login.html">Add New Users</a>
                                 </li>
                                 <li>
-                                    <a href="register.html">User List</a>
+                                    <a href="../register.html">User List</a>
                                 </li>
                                 
                             </ul>
@@ -328,17 +314,12 @@ $query_run=mysqli_query($connect , $query);
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
+                                                    <a href="../account_setings.php">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div>
-                                                
+                                                </div>                                             
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
+                                                <a href="../logout.php">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
@@ -349,88 +330,3 @@ $query_run=mysqli_query($connect , $query);
                     </div>
                 </div>
             </header>
-            <!-- HEADER DESKTOP-->
-
-            <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                       <!--  Start Copy From Here -->
-                       <div class="row m-t-30">
-                            <div class="col-md-12">
-                                <!-- DATA TABLE-->
-                                <div class="table-responsive m-b-40">
-                                    <table class="table table-borderless table-data3">
-                                        <h3>Accounts Table</h3>
-                                        <br>
-                                        <thead>
-                                            <tr>
-                                                <th>SL NO</th>
-                                                <th>User Name</th>
-                                                <th>User Password</th>
-                                                <th colspan="2">Action</th>
-                                                                              
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                                $counter=0;
-                                                $query="select * from users";
-                                                $query_run=mysqli_query($connect, $query);
-                                                while($row=mysqli_fetch_array($query_run)){
-                                                    $counter++;
-
-                                                ?>
-                                            <tr>
-
-                                                <td><?php echo $counter; ?></td>
-                                                <td><?php echo $row['name']; ?></td>
-                                                <td>••••••••••</td>
-                                                
-                                                <td><a href="..\inc.process\edit_account_setings.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
-
-                                                <td><a href="inc.process/delete_account_setings.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" onclick=" return confirm('Sure you want to delete???');" >Delete</button></a></td>
-                                                
-                                            <?php } ?>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- END DATA TABLE-->
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
-            </div>
-
-    </div>
-
-    <!-- Jquery JS-->
-    <script src="../vendor/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap JS-->
-    <script src="../vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="../vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="../vendor/slick/slick.min.js">
-    </script>
-    <script src="../vendor/wow/wow.min.js"></script>
-    <script src="../vendor/animsition/animsition.min.js"></script>
-    <script src="../vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="../vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="../vendor/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="../vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="../vendor/select2/select2.min.js">
-    </script>
-
-    <!-- Main JS-->
-    <script src="../js/main.js"></script>
-
-</body>
-
-</html>
-<!-- end document-->

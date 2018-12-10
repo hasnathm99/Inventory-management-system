@@ -7,7 +7,7 @@ if(isset($_POST["product_name"]))
 
  for($count = 0; $count < count($_POST["product_name"]); $count++)
  {  
-  $query = "INSERT INTO purchase 
+  $query = "INSERT INTO sales 
   (company_name, order_date, product_name, ream, unit_price, total) 
   VALUES (:company_name, :order_date, :product_name, :ream, :unit_price, :total)
   ";
