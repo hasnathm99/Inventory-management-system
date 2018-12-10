@@ -127,7 +127,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
+                <a href="index.php">
                     <h3>Sharif Stationary</h3>
                 </a>
             </div>
@@ -156,7 +156,7 @@
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 
                                 <li>
-                                    <a href="view_stock.html">Stock Report</a>
+                                    <a href="view_stock.php">Stock Report</a>
                                 </li>
                             </ul>
                         </li>
@@ -180,7 +180,7 @@
                                     <a href="add_sales.php">Add Sales</a>
                                 </li>
                                 <li>
-                                    <a href="sales_report.html">Sales Table</a>
+                                    <a href="sales_report.php">Sales Table</a>
                                 </li>
                             </ul>
                         </li>

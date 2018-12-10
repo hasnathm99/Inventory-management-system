@@ -333,18 +333,17 @@ $id=$_GET['id'];
                     <div class="container-fluid">
                         <!-- Start to Copy From Here -->
                             <?php
-                            $query1="select * from product where id=$id ";
+                            $query1="select * from purchase where id=$id ";
 							$query1_run=mysqli_query($connect , $query1);
 							while($row=mysqli_fetch_array($query1_run)){
+								$company_name=$row['company_name'];
 								$product_name=$row['product_name'];
-								$product_color=$row['product_color'];
-								$product_gsm=$row['product_gsm'];
 								$unit_price=$row['unit_price'];
-								$product_width=$row['product_width'];
-								$product_height=$row['product_height'];
+								$ream=$row['ream'];
+								
 							}
                             ?>
-                                <form action="edit_product_process_func.php?id=<?php echo $id; ?>" method="POST">
+                                <form action="edit_purchase_report_process_func.php?id=<?php echo $id; ?>" method="POST">
                                     <div class="col-lg-10">
                                 <div class="card">
                                     <div class="card-header"><b>Edit Product Information</b></div>
@@ -355,36 +354,22 @@ $id=$_GET['id'];
                                         <hr>
                                         <form action="" method="post" novalidate="novalidate">
                                             <div class="form-group">
+                                                <label for="company_name" class="control-label mb-1">Company Name</label>
+                                                <input id="company_name" name="company_name" type="text" class="form-control" value="<?php echo $company_name; ?>" >
+                                            </div>
+                                            <div class="form-group has-success">
                                                 <label for="product_name" class="control-label mb-1">Product Name</label>
-                                                <input id="product_name" name="product_name" type="text" class="form-control" value="<?php echo $product_name; ?>" >
+                                                <input id="product_name" name="product_name" type="text" class="form-control " value="<?php echo $product_name; ?>">
                                             </div>
                                             <div class="form-group has-success">
-                                                <label for="product_color" class="control-label mb-1">Product Color</label>
-                                                <input id="product_color" name="product_color" type="text" class="form-control " value="<?php echo $product_color; ?>">
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label for="product_gsm" class="control-label mb-1">GSM</label>
-                                                <input id="product_gsm" name="product_gsm" type="text" class="form-control " value="<?php echo $product_gsm; ?>">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="unit_price" class="control-label mb-1">Unit Price</label>
+                                                <label for="unit_price" class="control-label mb-1">Sales Unit Price</label>
                                                 <input id="unit_price" name="unit_price" type="text" class="form-control " value="<?php echo $unit_price; ?>">
                                             </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="product_width" class="control-label mb-1">Width</label>
-                                                        <input id="product_width" name="product_width" type="text" class="form-control " value="<?php echo $product_width; ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="product_height" class="control-label mb-1">Height</label>
-                                                    <div class="input-group">
-                                                        <input id="product_height" name="product_height" type="text" class="form-control " value="<?php echo $product_height; ?>">
-
-                                                    </div>
-                                                </div>
+                                            <div class="form-group">
+                                                <label for="ream" class="control-label mb-1">Total Ream</label>
+                                                <input id="ream" name="ream" type="text" class="form-control " value="<?php echo $ream; ?>">
                                             </div>
+                                            
                                             <div>
                                                 <button id="payment-button" type="submit" name="submit" class="btn btn-lg btn-info btn-block">
                                                     <i class="fa fa-lock fa-lg"></i>&nbsp;

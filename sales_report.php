@@ -1,7 +1,3 @@
-<?php
-require_once('db_connect.php');
-$id=$_GET['id'];
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,25 +13,25 @@ $id=$_GET['id'];
     <title>Dashboard</title>
 
     <!-- Fontfaces CSS-->
-    <link href="../css/font-face.css" rel="stylesheet" media="all">
-    <link href="../vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="../vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="../vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="css/font-face.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="../vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
-    <link href="../vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="../vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="../vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="../vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="../vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="../vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="../vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="../css/theme.css" rel="stylesheet" media="all">
+    <link href="css/theme.css" rel="stylesheet" media="all">
 
 </head>
 
@@ -63,7 +59,20 @@ $id=$_GET['id'];
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                            
+                            <!-- <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="index.html">Dashboard 1</a>
+                                </li>
+                                <li>
+                                    <a href="index2.html">Dashboard 2</a>
+                                </li>
+                                <li>
+                                    <a href="index3.html">Dashboard 3</a>
+                                </li>
+                                <li>
+                                    <a href="index4.html">Dashboard 4</a>
+                                </li>
+                            </ul> -->
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
@@ -87,6 +96,7 @@ $id=$_GET['id'];
                                         <li>
                                             <a href="view_stock.html">Stock Report</a>
                                         </li>
+                                        
                                     </ul>
                         </li>
                         <li>
@@ -283,7 +293,7 @@ $id=$_GET['id'];
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="../images/icon/download.png" alt="Sharif Stationary" />
+                                            <img src="images/icon/download.png" alt="Sharif Stationary" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">Sharif Stationary</a>
@@ -292,7 +302,7 @@ $id=$_GET['id'];
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="../images/icon/download.png" alt="Sharif Stationary" />
+                                                        <img src="images/icon/download.png" alt="Sharif Stationary" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -332,72 +342,90 @@ $id=$_GET['id'];
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <!-- Start to Copy From Here -->
-                            <?php
-                            $query1="select * from product where id=$id ";
-							$query1_run=mysqli_query($connect , $query1);
-							while($row=mysqli_fetch_array($query1_run)){
-								$product_name=$row['product_name'];
-								$product_color=$row['product_color'];
-								$product_gsm=$row['product_gsm'];
-								$unit_price=$row['unit_price'];
-								$product_width=$row['product_width'];
-								$product_height=$row['product_height'];
-							}
-                            ?>
-                                <form action="edit_product_process_func.php?id=<?php echo $id; ?>" method="POST">
-                                    <div class="col-lg-10">
-                                <div class="card">
-                                    <div class="card-header"><b>Edit Product Information</b></div>
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <h3 class="text-center title-2">Provide New Information</h3>
-                                        </div>
-                                        <hr>
-                                        <form action="" method="post" novalidate="novalidate">
-                                            <div class="form-group">
-                                                <label for="product_name" class="control-label mb-1">Product Name</label>
-                                                <input id="product_name" name="product_name" type="text" class="form-control" value="<?php echo $product_name; ?>" >
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label for="product_color" class="control-label mb-1">Product Color</label>
-                                                <input id="product_color" name="product_color" type="text" class="form-control " value="<?php echo $product_color; ?>">
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label for="product_gsm" class="control-label mb-1">GSM</label>
-                                                <input id="product_gsm" name="product_gsm" type="text" class="form-control " value="<?php echo $product_gsm; ?>">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="unit_price" class="control-label mb-1">Unit Price</label>
-                                                <input id="unit_price" name="unit_price" type="text" class="form-control " value="<?php echo $unit_price; ?>">
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="product_width" class="control-label mb-1">Width</label>
-                                                        <input id="product_width" name="product_width" type="text" class="form-control " value="<?php echo $product_width; ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="product_height" class="control-label mb-1">Height</label>
-                                                    <div class="input-group">
-                                                        <input id="product_height" name="product_height" type="text" class="form-control " value="<?php echo $product_height; ?>">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <button id="payment-button" type="submit" name="submit" class="btn btn-lg btn-info btn-block">
-                                                    <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                                    <span id="payment-button-amount">Update</span>
-                                                    <span id="payment-button-sending" style="display:none;">Updating...</span>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+                            <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+                                <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3">
+                                        <h3>Product Table</h3>
+                                        <br>
+                                        <thead>
+                                            <tr>
+                                                <th>Item Name</th>
+                                                <th>MT</th>
+                                                <th>Ream</th>
+                                                <th>Unit Price</th>
+                                                <th>Discount Percent</th>
+                                                <th>Total Discount</th>
+                                                <th>Vat</th>
+                                                <th>Total Vat</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td>001</td>
+                                            </tr>
+                                             <tr>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td>001</td>
+                                            </tr>
+                                             <tr>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td>001</td>
+                                            </tr>
+                                             <tr>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td>001</td>
+                                            </tr>
+                                             <tr>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td>001</td>
+                                                <td>Vitol Pronting Paper</td>
+                                                <td>55 GSM 23" x 36"</td>
+                                                <td class="process">Yellow</td>
+                                                <td>001</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
                                 </div>
+                                <!-- END DATA TABLE-->
                             </div>
-                                </form>
-                            
+                        </div>
+
                         <!-- End the Copy From Here -->
                         <div class="row">
                             <div class="col-md-12">
@@ -416,26 +444,26 @@ $id=$_GET['id'];
     </div>
 
     <!-- Jquery JS-->
-    <script src="../vendor/jquery-3.2.1.min.js"></script>
+    <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
-    <script src="../vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="../vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="../vendor/slick/slick.min.js">
+    <script src="vendor/slick/slick.min.js">
     </script>
-    <script src="../vendor/wow/wow.min.js"></script>
-    <script src="../vendor/animsition/animsition.min.js"></script>
-    <script src="../vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
     </script>
-    <script src="../vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="../vendor/counter-up/jquery.counterup.min.js">
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
     </script>
-    <script src="../vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="../vendor/select2/select2.min.js">
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/select2/select2.min.js">
     </script>
 
     <!-- Main JS-->
-    <script src="../js/main.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 

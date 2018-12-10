@@ -33,8 +33,8 @@ require_once('include\db_connect.php');
                                                 <input id="product_gsm" name="product_gsm" type="text" class="form-control " >
                                             </div>
                                             <div class="form-group">
-                                                <label for="product_thickness" class="control-label mb-1">Thickness</label>
-                                                <input id="product_thickness" name="product_thickness" type="text" class="form-control " >
+                                                <label for="unit_price" class="control-label mb-1">Unit Price</label>
+                                                <input id="unit_price" name="unit_price" type="text" class="form-control " >
                                             </div>
                                             <div class="row">
                                                 <div class="col-6">

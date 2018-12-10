@@ -11,26 +11,31 @@ require_once('include\db_connect.php');
                         <!-- Start to Copy From Here -->
                             <div class="row m-t-30">
                             <div class="col-md-12">
+
                                 <!-- DATA TABLE-->
                                 <div class="table-responsive m-b-40">
                                     <table class="table table-borderless table-data3">
+
                                         <h3>Product Table</h3>
                                         <br>
+                                        
                                         <thead>
                                             <tr>
-                                                <th>SL NO</th>
+                                                <th >SL NO</th>
+                                                <th>Company Name</th>
                                                 <th>Product Name</th>
-                                                <th>Product Size</th>
-                                                <th>Product Color</th>
+                                                <th>Purchase Unit Price</th>
+                                                <th>Purchase Ream</th>
+                                                <th>Total Amount</th>
+                                                <th>Purchase Date</th>
                                                 <th colspan="2" style="text-align: center;">Action</th>                               
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                             <?php
+                                        <?php
                                                 $counter=0;
 
-                                                $result_per_page=10;
-                                                $query="select * from product";
+                                                $result_per_page=5;
+                                                $query="select * from purchase";
                                                 $query_run=mysqli_query($connect, $query);
                                                 $number_of_result=mysqli_num_rows($query_run);
                                                 $number_of_page=ceil($number_of_result/$result_per_page);
@@ -39,15 +44,16 @@ require_once('include\db_connect.php');
                                                 }else{
                                                     $page=$_GET['page'];
                                                 }
+                                                echo 'You are on Page <b>'.$page.'</b><br>';
 
                                                 $starting_limit_num=($page-1)*$result_per_page;
-                                                $query="select * from product limit " .$starting_limit_num.",".$result_per_page;
+                                                $query="select * from purchase limit " .$starting_limit_num.",".$result_per_page;
                                                 $query_run=mysqli_query($connect , $query);
 
                                                 
                                                 for($page=1;$page<=$number_of_page;$page++){
                                                 // echo 
-                                                echo '<a href="view_product.php?page=' .$page.' "><button class="btn btn-success" style="margin-right:1px">'. $page . '</button></a> ';
+                                                echo '<a href="purchase_report.php?page=' .$page.' ">'. $page . '</a> ';
                                                  }
                                                 
                                                 // $query="select * from product";
@@ -56,14 +62,18 @@ require_once('include\db_connect.php');
                                                     $counter++;
 
                                                 ?>
+                                        <tbody>
+                                             
                                             <tr>
 
-                                                <td><?php echo $counter; ?></td>
+                                                <td ><?php echo $counter; ?></td>
+                                                <td><?php echo $row['company_name']; ?></td>
                                                 <td><?php echo $row['product_name']; ?></td>
-                                                <td><?php echo $row['product_gsm'].' GSM  '.$row['product_width'].'" X '. $row['product_height'].'"' ; ?></td>
-                                                <td><?php echo $row['product_color']; ?></td>
-
-                                                <td><a href="inc.process\edit_product_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
+                                                <td><?php echo $row['unit_price']; ?></td>
+                                                <td><?php echo $row['ream']; ?></td>
+                                                <td><?php echo $row['total']; ?></td>
+                                                <td ><?php echo date("d-m-Y", strtotime($row['dc_date']));?></td>
+                                                <td><a href="inc.process\edit_purchase_report_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
 
                                                 <td><a href="inc.process/delete_product.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" onclick=" return confirm('Sure you want to delete???');" >Delete</button></a></td>
                                                 
