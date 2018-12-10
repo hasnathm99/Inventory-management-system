@@ -27,7 +27,7 @@ require_once('include\db_connect.php');
                                         <tbody>
                                             <?php
                                             $counter=0;
-                                            $query="select product_name,sum(mt), sum(ream) from purchase group by product_name";
+                                            $query="select product_name, sum(ream) from purchase group by product_name";
                                             $query_run=mysqli_query($connect, $query);
                                             while($row=mysqli_fetch_array($query_run)){
                                                 $counter++;

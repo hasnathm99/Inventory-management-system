@@ -314,12 +314,12 @@
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="include/account_setings.php">
+                                                    <a href="account_setings.php">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
                                                 </div>                                             
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="include/logout.php">
+                                                <a href="logout.php">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>

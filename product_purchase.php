@@ -42,7 +42,7 @@ function fill_unit_select_box($connect)
                                                                 <input id="company_name" name="company_name" type="text" class="form-control">
                                                             </div>
                                                         </div>
-                                                        <div class="col-6">
+                                                        <!-- <div class="col-6">
                                                             <label for="dc_no" class="control-label mb-1">DC NO</label>
                                                             <div class="input-group">
                                                                 <input id="dc_no" name="dc_no" type="text" class="form-control">
@@ -53,17 +53,17 @@ function fill_unit_select_box($connect)
                                                                 <label for="dc_date" class="control-label mb-1">DC Date</label>
                                                                 <input id="dc_date" name="dc_date" type="date" class="form-control">
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="row">
                                                         
-                                                        <div class="col-6">
+                                                        <!-- <div class="col-6">
                                                             <label for="order_no" class="control-label mb-1">Order No</label>
                                                             <div class="input-group">
                                                                 <input id="order_no" name="order_no" type="text" class="form-control ">
 
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="col-6">
                                                             <div class="form-group">
                                                                 <label for="order_date" class="control-label mb-1">Order Date</label>

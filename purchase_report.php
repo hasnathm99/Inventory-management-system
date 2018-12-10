@@ -72,7 +72,7 @@ require_once('include\db_connect.php');
                                                 <td><?php echo $row['unit_price']; ?></td>
                                                 <td><?php echo $row['ream']; ?></td>
                                                 <td><?php echo $row['total']; ?></td>
-                                                <td ><?php echo date("d-m-Y", strtotime($row['dc_date']));?></td>
+                                                <td ><?php echo date("d-m-Y", strtotime($row['order_date']));?></td>
                                                 <td><a href="inc.process\edit_purchase_report_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
 
                                                 <td><a href="inc.process/delete_product.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" onclick=" return confirm('Sure you want to delete???');" >Delete</button></a></td>

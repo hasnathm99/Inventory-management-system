@@ -113,9 +113,7 @@ if(!isset($_SESSION['user_id'])){
             </div>
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
-        </div>
-
-    </div>
+       
 
    <?php require 'include/footer.php' ?>
 <!-- end document-->
