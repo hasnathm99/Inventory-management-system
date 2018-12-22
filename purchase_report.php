@@ -21,7 +21,7 @@ require_once('include\db_connect.php');
                                         
                                         <thead>
                                             <tr>
-                                                
+                                                <th >SL NO</th>
                                                 <th>Company Name</th>
                                                 <th>Product Name</th>
                                                 <th>Purchase Unit Price</th>
@@ -34,8 +34,8 @@ require_once('include\db_connect.php');
                                         <?php
                                                 $counter=0;
 
-                                                $result_per_page=5;
-                                                $query="select * from purchase  ";
+                                                $result_per_page=100;
+                                                $query="select * from purchase";
                                                 $query_run=mysqli_query($connect, $query);
                                                 $number_of_result=mysqli_num_rows($query_run);
                                                 $number_of_page=ceil($number_of_result/$result_per_page);
@@ -47,7 +47,7 @@ require_once('include\db_connect.php');
                                                 echo 'You are on Page <b>'.$page.'</b><br>';
 
                                                 $starting_limit_num=($page-1)*$result_per_page;
-                                                $query="select * from purchase order by order_date DESC limit  " .$starting_limit_num.",".$result_per_page ;
+                                                $query="select * from purchase limit " .$starting_limit_num.",".$result_per_page;
                                                 $query_run=mysqli_query($connect , $query);
 
                                                 
@@ -66,7 +66,7 @@ require_once('include\db_connect.php');
                                              
                                             <tr>
 
-                                                
+                                                <td ><?php echo $counter; ?></td>
                                                 <td><?php echo $row['company_name']; ?></td>
                                                 <td><?php echo $row['product_name']; ?></td>
                                                 <td><?php echo $row['unit_price']; ?></td>

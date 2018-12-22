@@ -25,14 +25,14 @@ require_once('include\db_connect.php');
                                                 <th>Sales Ream</th>
                                                 <th>Total Amount</th>
                                                 <th>Sales Date</th>
-                                                <th colspan="2" style="text-align: center;">Action</th>                               
+                                                <!-- <th colspan="2" style="text-align: center;">Action</th> -->                               
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                                 $counter=0;
 
-                                                $result_per_page=10;
+                                                $result_per_page=100;
                                                 $query="select * from sales  ";
                                                 $query_run=mysqli_query($connect, $query);
                                                 $number_of_result=mysqli_num_rows($query_run);

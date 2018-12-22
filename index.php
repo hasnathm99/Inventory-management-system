@@ -1,12 +1,16 @@
 <?php
 ob_start();
 session_start();
+require('include/db_connect.php');
 
 if(!isset($_SESSION['user_id'])){
   echo '<h2 style="color:#C9302C">Log in First<h2>';
   header('Location: login.php');
-  
   die();
+ }
+ else{
+    $query="SET GLOBAL event_scheduler = ON";
+    $query_run=mysqli_query($connect , $query);
 }
 
 ?>
@@ -117,3 +121,15 @@ if(!isset($_SESSION['user_id'])){
 
    <?php require 'include/footer.php' ?>
 <!-- end document-->
+
+<!-- time event for profit/loss -->
+<?php
+    $query=" CREATE EVENT IF NOT EXISTS test_event_04
+        ON SCHEDULE EVERY 1 MINUTE
+        
+        DO
+            INSERT INTO pl_per_day(amount) 
+                    SELECT sum(profit_loss)  FROM sales ";
+    $query_run=mysqli_query($connect , $query);
+
+?>

@@ -1,34 +1,17 @@
-<?php
-//index.php
+<?php 
 
-$connect = new PDO("mysql:host=localhost;dbname=inventory_management_system", "root", "");
-function fill_unit_select_box($connect)
-{ 
- $output = '';
- $query = "SELECT * FROM product";
- $statement = $connect->prepare($query);
- $statement->execute();
- $result = $statement->fetchAll();
- foreach($result as $row)
- {
-  $output .= '<option value="'.$row["product_name"].'">'.$row["product_name"].'</option>';
- }
- return $output;
-}
-
-?>
-<?php $currentPage = 'add_product'; include 'include/header.php' ?>
+include('include/db_connect.php');
+include 'include/header.php' ?>
                         <!-- Start to Copy From Here -->
 
-                            <form method="POST" id="insert_form">
-                                <span id="error"></span>
+                            <form method="POST" action="inc.process/add_sales_process.php?">
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <!-- DATA TABLE-->
                                         <div class="table-responsive m-b-40">
                                             <div class="col-lg-7">
                                         <div class="card">
-                                            <div class="card-header">Purchase Information</div>
+                                            <div class="card-header">sales Information</div>
                                             <div class="card-body">
                                                 <div class="card-title">
                                                     <h3 class="text-center title-2">Provide Information</h3>
@@ -39,18 +22,16 @@ function fill_unit_select_box($connect)
                                                         <div class="col-12">
                                                             <label for="company_name" class="control-label mb-1">Company Name</label>
                                                             <div class="input-group">
-                                                                <input id="company_name" name="company_name" type="text" class="form-control">
+                                                                <input id="company_name" name="company_name" type="text" class="form-control" required>
                                                             </div>
                                                         </div>
                                                         
                                                     </div>
                                                     <div class="row">
-                                                        
-                                                        
                                                         <div class="col-6">
                                                             <div class="form-group">
                                                                 <label for="order_date" class="control-label mb-1">Order Date</label>
-                                                                <input id="order_date" name="order_date" type="date" class="form-control">
+                                                                <input id="order_date" name="order_date" type="date" class="form-control" required>
                                                                 
                                                             </div>
                                                         </div>
@@ -60,32 +41,68 @@ function fill_unit_select_box($connect)
                                     </div>
 
                                             <table class="table table-borderless table-data3" id="item_table">
-                                                <button type="button" name="add" class="btn btn-success btn-sm add" style="margin-bottom: 5px;"><i class="fas fa-plus"></i>  Add Row</button>
+                                                
                                                 <thead>
                                                     <tr>
                                                         <th>Product Name</th>
                                                         <th>Ream</th>
-                                                        <th>Unit Price</th>
-                                                        <th>Total</th>
-                                                        <th></th>
-                                                        
+                                                        <th>Market Unit Price</th>
+                                                        <th>Sales Unit Price</th>
+                                                        <th>Total</th>              
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    
-                                                </tbody>
-                                                <tfoot>
                                                     <tr>
-                                                        <td>Sub Total</td>
-                                                        <td><input type="number" name="t_ream" class="t_ream" value=""placeholder="Total Ream" readonly=""></td>
-                                                        <td></td>
-                                                        <td><input type="number" name="" class="subt" value="" placeholder="Total Spent" readonly=""></td>
-                                                        <td></td>
+                                                      <td>
+                                                            <div class="form-group">
+                                                                <!-- <label for="product_name" class="control-label ">Product</label> -->
+                                                                <select  name="product_name" required>
+                                                                    <option value="NULL" >---Select---</option>
+                                                                    <?php
+                                                                    $query="select * from product ";
+                                                                    $query_run=mysqli_query($connect,$query);
+                                                                    $row_count=mysqli_num_rows($query_run);
+                                                                    while($row=mysqli_fetch_array($query_run)){
+                                                                        ?>
+                                                                        <option value="<?php echo $row['product_name']; ?>" required> <?php echo $row['product_name']; ?></option required>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                                
+                                                            </div>
+                                                        </td>
+                                                        <td><div >
+                                                            <div class="form-group">
+                                                                <!-- <label for="ream" class="control-label ">Ream</label> -->
+                                                                <input id="ream" name="ream" type="text" class="form-control" required>
+                                                                
+                                                            </div>
+                                                        </div></td>
+                                                        <td><div >
+                                                            <div class="form-group">
+                                                                <!-- <label for="m_unit_price" class="control-label ">Market Unit Price</label> -->
+                                                                <input id="m_unit_price" name="m_unit_price" type="text" class="form-control" required>
+                                                                
+                                                            </div>
+                                                        </div></td>
+                                                        <td><div >
+                                                            <div class="form-group">
+                                                                <!-- <label for="s_unit_price" class="control-label">Sale Unit Price</label> -->
+                                                                <input id="s_unit_price" name="s_unit_price" type="text" class="form-control" required>
+                                                                
+                                                            </div>
+                                                        </div></td>
+                                                        <td><div >
+                                                            <div class="form-group">
+                                                                <!-- <label for="total" class="control-label ">Total</label> -->
+                                                                <input id="total" name="total" type="text" class="form-control" >
+                                                                
+                                                            </div>
+                                                        </div></td>
                                                         
                                                     </tr>
-                                                    
-                                                </tfoot>
-                                                
+                                                </tbody>
                                             </table>
                                         </div>
                                         
@@ -98,7 +115,7 @@ function fill_unit_select_box($connect)
                             </form>
 
 
-                        <!-- end of second form -->
+                        <!-- end of  form -->
 
 
                         <!-- End the Copy From Here -->
@@ -119,112 +136,11 @@ function fill_unit_select_box($connect)
     </div>
 
 <?php require 'include/footer.php' ?>
-<!-- end document-->
-<script>
-$(document).ready(function(){
- 
- $(document).on('click', '.add', function(){
-  var html = '';
-  html += '<tr>';
-  html += '<td><select name="product_name[]" class="pu-input product_name"><option value="">--Select--</option><?php echo fill_unit_select_box($connect); ?></select></td>';
-  html += '<td><input type="text" name="ream[]" class="pu-input ream"></td>';
-  html += '<td><input type="text" name="unit_price[]" class="pu-input unit_price"></td>';
-  html += '<td><input type="text" name="total[]" class="pu-input total"></td>';
-  html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span><i class="fas fa-minus"></i></span></button></td></tr>';
-$('#item_table').append(html);
- });
-
- $(document).on('click', '.remove', function(){
-  $(this).closest('tr').remove();
- });
-
-
-$('table').on('keyup', 'input', function(){ // run anytime the value changes
-    $thisRow = $(this).parent().parent();console.log($thisRow.find('td>.total'));
-    var ream  = Number($thisRow.find('td>.ream').val());   // get value of field
-    var price = Number($thisRow.find('td>.unit_price').val()); // convert it to a float
-
-    $thisRow.find('td>.total').val(ream * price);
-
-  });
-// Subtotal of values ream
-$(document).on("change", ".ream", function() {
-    var sum = 0;
-    $(".ream").each(function(){
-        sum += +$(this).val();
+<script >
+    $(function() {
+        $("#ream, #s_unit_price").on("keydown keyup", sum);
+      function sum() {
+      $("#total").val(Number($("#ream").val()) * Number($("#s_unit_price").val()));
+      }
     });
-    $(".t_ream").val(sum);
-});
-
-// Subtotal of values total
-$(document).on("change", ".total", function() {
-    var sum = 0;
-    $(".total").each(function(){
-        sum += +$(this).val();
-    });
-    $(".subt").val(sum);
-});
- $('#insert_form').on('submit', function(event){
-  event.preventDefault();
-  var error = '';
-  $('.item_name').each(function(){
-   var count = 1;
-   if($(this).val() == '')
-   {
-    error += "<p>Enter Item Name at "+count+" Row</p>";
-    return false;
-   }
-   count = count + 1;
-  });
-  
-  $('.item_quantity').each(function(){
-   var count = 1;
-   if($(this).val() == '')
-   {
-    error += "<p>Enter Item Quantity at "+count+" Row</p>";
-    return false;
-   }
-   count = count + 1;
-  });
-  
-  $('.product_name').each(function(){
-   var count = 1;
-   if($(this).val() == '')
-   {
-    error += "<p>Select Unit at "+count+" Row</p>";
-    return false;
-   }
-   count = count + 1;
-  });
-  var form_data = $(this).serialize();
-  if(error == '')
-  {
-   $.ajax({
-    url:"inc.process/add_sales_process.php",
-    method:"POST",
-    data: form_data,
-    success:function(data)
-    {
-     if(data == 'ok')
-     {
-      
-      // $('#error').html('<div class="alert alert-success">Item Details Saved</div>');
-      alert('Information Saved Successfully');
-      location.reload();
-      window.location.replace("index.php");
-     }
-    }
-   });
-  }
-  else
-  {
-   $('#error').html('<div class="alert alert-danger">'+error+'</div>');
-  }
- });
-    
-
-});
-
-
-
 </script>

@@ -25,8 +25,10 @@ if(isset($_POST["product_name"]))
   );
  }
  $result = $statement->fetchAll();
+ 
  if(isset($result))
  {
+
   echo 'ok';
  }
 }

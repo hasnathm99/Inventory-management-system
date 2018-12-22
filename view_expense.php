@@ -29,20 +29,43 @@ require_once('include\db_connect.php');
                                         <tbody>
                                             <?php
                                                 $counter=0;
-                                                
-                                                $query="select * from expense";
+
+                                                $result_per_page=100;
+                                                $query="select * from expense  ";
                                                 $query_run=mysqli_query($connect, $query);
-                                                while($row=mysqli_fetch_array($query_run)){
+                                                $number_of_result=mysqli_num_rows($query_run);
+                                                $number_of_page=ceil($number_of_result/$result_per_page);
+                                                if(!isset($_GET['page'])){ 
+                                                    $page=1;
+                                                }else{
+                                                    $page=$_GET['page'];
+                                                }
+                                                echo 'You are on Page <b>'.$page.'</b><br>';
+
+                                                $starting_limit_num=($page-1)*$result_per_page;
+                                                $query="select * from expense order by date DESC limit  " .$starting_limit_num.",".$result_per_page ;
+                                                $query_run=mysqli_query($connect , $query);
+
+                                                
+                                                for($page=1;$page<=$number_of_page;$page++){
+                                                // echo 
+                                                echo '<a href="view_expense.php?page=' .$page.' ">'. $page . '</a> ';
+                                                 }
+                                                
+                                                // $query="select * from product";
+                                                // $query_run=mysqli_query($connect, $query);
+                                                while($row2=mysqli_fetch_array($query_run)){
                                                     $counter++;
 
                                                 ?>
+                                            
                                             <tr>
 
                                                 <td><?php echo $counter; ?></td>
-                                                <td><?php echo $row['title']; ?></td>
-                                                <td><?php echo $row['amount']; ?></td>
-                                                <td><?php echo $row['remarks']; ?></td>
-                                                <td><?php echo $row['date']; ?></td>
+                                                <td><?php echo $row2['title']; ?></td>
+                                                <td><?php echo $row2['amount']; ?></td>
+                                                <td><?php echo $row2['remarks']; ?></td>
+                                                <td><?php echo $row2['date']; ?></td>
                                                 <td><a href="inc.process\edit_expense_process.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Edit</button></a></td>
 
                                                 <td><a href="inc.process/delete_product.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger" onclick=" return confirm('Sure you want to delete???');" >Delete</button></a></td>

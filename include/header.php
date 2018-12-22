@@ -1,61 +1,3 @@
-<?php
-
-require_once("db_connect.php");
-if (!isset($_SESSION["user_id"]) || $_SESSION["user_id"] == "") {
-    // not logged in send to login page
-    redirect("login.php");
-}
-
-// set page title
-$title = "Dashboard";
-
-// if the rights are not set then add them in the current session
-if (!isset($_SESSION["access"])) {
-
-    try {
-
-        $sql = "SELECT mod_modulegroupcode, mod_modulegroupname FROM module "
-                . " WHERE 1 GROUP BY `mod_modulegroupcode` "
-                . " ORDER BY `mod_modulegrouporder` ASC, `mod_moduleorder` ASC  ";
-
-
-        $stmt = $DB->prepare($sql);
-        $stmt->execute();
-        $commonModules = $stmt->fetchAll();
-
-        $sql = "SELECT mod_modulegroupcode, mod_modulegroupname, mod_modulepagename,  mod_modulecode, mod_modulename FROM module "
-                . " WHERE 1 "
-                . " ORDER BY `mod_modulegrouporder` ASC, `mod_moduleorder` ASC  ";
-
-        $stmt = $DB->prepare($sql);
-        $stmt->execute();
-        $allModules = $stmt->fetchAll();
-
-        $sql = "SELECT rr_modulecode, rr_create,  rr_edit, rr_delete, rr_view FROM role_rights "
-                . " WHERE  rr_rolecode = :rc "
-                . " ORDER BY `rr_modulecode` ASC  ";
-
-        $stmt = $DB->prepare($sql);
-        $stmt->bindValue(":rc", $_SESSION["rolecode"]);
-        
-        
-        $stmt->execute();
-        $userRights = $stmt->fetchAll();
-
-        $_SESSION["access"] = set_rights($allModules, $userRights, $commonModules);
-
-    } catch (Exception $ex) {
-
-        echo $ex->getMessage();
-    }
-}
-
-
-?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,7 +41,7 @@ if (!isset($_SESSION["access"])) {
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <h3>Sharif Stationary</h3>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -114,7 +56,7 @@ if (!isset($_SESSION["access"])) {
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             
                         </li>
@@ -191,25 +133,24 @@ if (!isset($_SESSION["access"])) {
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
-                    <!-- <ul class="list-unstyled navbar__list">
-                        
+                    <ul class="list-unstyled navbar__list">
                         <li class=" has-sub">
-                            <a class="js-arrow" href="index.php">
+                            <a class="index.php">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i><i class="fas fa-caret-down caret"></i></a> -->
-                            <!-- <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <i class="fas fa-chart-bar"></i>Product<i class="fas fa-caret-down caret"></i></a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="add_product.php" class="">Add new Product</a>
+                                    <a href="add_product.php">Add new Product</a>
                                 </li>
                                 <li>
-                                    <a href="view_product.php" class="">Product Report</a>
+                                    <a href="view_product.php">Product Report</a>
                                 </li>
-                            </ul> -->
-                        <!-- </li> -->
-                        <!-- <li class="has-sub">
+                            </ul>
+                        </li>
+                        <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-chart-bar"></i>Stock<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
@@ -256,25 +197,15 @@ if (!isset($_SESSION["access"])) {
                             </ul>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="far fa-check-square"></i>Loss/Profit<i class="fas fa-caret-down caret"></i></a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="#">Daily Basis</a>
-                                </li>
-                                <li>
-                                    <a href="#">Monthly Basis</a>
-                                </li>
-                                <li>
-                                    <a href="#">Yearly Basis</a>
-                                </li>
-                            </ul>
-                        </li> -->
+                            <a class="js-arrow" href="profitloss.php">
+                                <i class="far fa-check-square"></i>Loss/Profit</a>
+                            
+                        </li>
                        <!--  <li>
                             <a href="#">
                                 <i class="fas fa-calendar-alt"></i>Reports</a>
                         </li> -->
-                        <!-- <li class="has-sub">
+                        <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Users<i class="fas fa-caret-down caret"></i></a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
@@ -286,28 +217,7 @@ if (!isset($_SESSION["access"])) {
                                 </li>
                                 
                             </ul>
-                        </li> -->
-                    <!-- </ul> -->
-                    <ul>
-                        <?php foreach ($_SESSION["access"] as $key => $access) { ?>
-                            <li>
-                                <?php echo $access["top_menu_name"]; ?>
-                                <?php
-                                echo '<ul>';
-                                foreach ($access as $k => $val) {
-                                    if ($k != "top_menu_name") {
-                                        echo '<li><a href="' . ($val["page_name"]) . '">' . $val["menu_name"] . '</a></li>';
-                                        ?>
-                                        <?php
-                                    }
-                                }
-                                echo '</ul>';
-                                ?>
-                            </li>
-                            <?php
-                        }
-                        ?>
-
+                        </li>
                     </ul>
                 </nav>
             </div>

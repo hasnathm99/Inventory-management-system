@@ -27,28 +27,33 @@ require_once('include\db_connect.php');
                                         <tbody>
                                             <?php
                                             $counter=0;
-                                            $query="select product_name, sum(ream) from purchase group by product_name";
-                                            $query_run=mysqli_query($connect, $query);
+                                            // $query="select product_name, sum(ream) from purchase group by product_name";
+                                            // $query_run=mysqli_query($connect, $query);
 
-                                            while($row=mysqli_fetch_array($query_run)){
+                                            // while($row=mysqli_fetch_array($query_run)){
+                                                
+                                            //     echo $product_name=$row['product_name'];
+                                            //     echo $sum_ream=$row['sum(ream)'];
+
+                                            //     $query2="update product set total_ream =$sum_ream where product_name='$product_name' ";
+                                            //     $quer2_run=mysqli_query($connect , $query2);
+                                            // }
+                                            $query3="select product_name, total_ream from product";
+                                            $query3_run=mysqli_query($connect, $query3);
+                                            while($row3=mysqli_fetch_array($query3_run)){
                                                 $counter++;
-                                                $product_name=$row['product_name'];
-                                                $sum_ream=$row['sum(ream)'];
-
-                                                $query2="update product set total_ream =$sum_ream where product_name='$product_name' ";
-                                                $quer2_run=mysqli_query($connect , $query2);
                                             ?>
                                             
                                             <tr>
                                                 <td><?php echo $counter; ?></td>
-                                            <td><?php echo $product_name ; ?></td>
-                                                <td><?php echo $sum_ream ; ?></td>
+                                            <td><?php echo $row3['product_name'] ; ?></td>
+                                                <td><?php echo $row3['total_ream'] ; ?></td>
                                                                                          
                                             </tr>
 
                                             <?php 
-                                            
-                                        } ?>
+                                            }
+                                         ?>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -58,41 +63,35 @@ require_once('include\db_connect.php');
                                 <!-- calculation -->
                                 <form action="inc.process\add_product_process.php" method="POST">
                                     <div class="col-lg-10">
-                                <div class="card">
-                                    <div class="card-header"><b>Calculate Stock Price</b></div>
-                                    <div class="card-body">
-                                        
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label for="unit_price" class="control-label mb-1">Unit Price</label>
-                                                        <input  name="unit_price" id="unit_price" type="text" class="form-control " >
+                                        <div class="card">
+                                            <div class="card-header"><b>Calculate Stock Price</b></div>
+                                            <div class="card-body">
+                                                
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="unit_price" class="control-label mb-1">Unit Price</label>
+                                                                <input  name="unit_price" id="unit_price" type="text" class="form-control " >
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="total_ream" class="control-label mb-1">Total Ream</label>
+                                                            <div class="input-group">
+                                                                <input id="total_ream" name="total_ream" type="text" class="form-control " >
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="total_price" class="control-label mb-1">Total Stock Price</label>
+                                                            <div class="input-group">
+                                                                <input id="total_price" name="total_price" type="text" class="form-control " disabled>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="total_ream" class="control-label mb-1">Total Ream</label>
-                                                    <div class="input-group">
-                                                        <input id="total_ream" name="total_ream" type="text" class="form-control " >
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="total_price" class="control-label mb-1">Total Stock Price</label>
-                                                    <div class="input-group">
-                                                        <input id="total_price" name="total_price" type="text" class="form-control " disabled>
-                                                    </div>
-                                                </div>
+
+                                                
                                             </div>
-                                            <!-- <div>
-                                                <button id="payment-button" type="submit" name="submit" class="btn btn-lg btn-info btn-block">
-                                                    <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                                    <span id="payment-button-amount">Show</span>
-                                                    <span id="payment-button-sending" style="display:none;">Saving...</span>
-                                                </button>
-                                            </div> -->
-                                        
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
                                 </form>
                             </div>
                         </div>
