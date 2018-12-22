@@ -47,7 +47,7 @@ require_once('include\db_connect.php');
                                                 echo 'You are on Page <b>'.$page.'</b><br>';
 
                                                 $starting_limit_num=($page-1)*$result_per_page;
-                                                $query="select * from purchase order by dc_date DESC limit  " .$starting_limit_num.",".$result_per_page ;
+                                                $query="select * from purchase order by order_date DESC limit  " .$starting_limit_num.",".$result_per_page ;
                                                 $query_run=mysqli_query($connect , $query);
 
                                                 

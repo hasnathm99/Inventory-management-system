@@ -1,64 +1,107 @@
-<!-- <?php
-session_start();
-require_once('include/db_connect.php');
-
-?> -->
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Transparent Login Form</title>
-        <link rel="stylesheet" href="css/login_style.css">
-
-    </head>
-    <body style="background: url(images/bird.png);">
-        <div class="loginBox">
-            <img src="images/user.png" class="user">
-            <h2>Log In Here</h2>
-            <form  method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <p>User Name</p>
-                <input type="text" name="name" placeholder="Enter Username" required="Enter Username">
-                <p>Password</p>
-                <input type="password" name="password" placeholder="••••••" required="Enter Password">
-                <input type="submit" name="submit" value="Sign In">
-                
-            </form>
-        </div>
-    </body>
-</html>
 <?php
-if(isset($_POST["name"]) and isset($_POST["password"])){
 
+require_once("include/db_connect.php");
 
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-            $name=test_input($_POST["name"]);
-            $password=test_input($_POST["password"]);
+if (isset($_SESSION["user_id"]) && $_SESSION["user_id"] != "") {
+    // if logged in send to dashboard page
+    redirect("index.php");
+}
 
-            if(!empty($name) and !empty($password)){
-                $query="select * FROM users ";
-                $query_run=mysqli_query($connect,$query);
+$title = "Login";
+$mode = $_REQUEST["mode"];
+if ($mode == "login") {
+    $username = trim($_POST['username']);
+    $pass = trim($_POST['user_password']);
 
-                while($row=mysqli_fetch_array($query_run)){
-                    $old_name=$row['name'];
-                    $old_password=$row['password'];
-                }
-                if($old_name==$name and $old_password==$password ){
-                    $_SESSION['user_id']=$password;
-                    header('location:index.php');
-                }else{
-                    $message="Wrong Information";
-                    ?>
-                    <script>
-                        var message= " <?php echo $message; ?> ";
-                        alert(message);
-                    </script>
-                    <?php
-                }
+    if ($username == "" || $pass == "") {
+
+        $_SESSION["errorType"] = "danger";
+        $_SESSION["errorMsg"] = "Enter manadatory fields";
+    } else {
+        $sql = "SELECT * FROM system_users WHERE u_username = :uname AND u_password = :upass ";
+
+        try {
+            $stmt = $DB->prepare($sql);
+
+            // bind the values
+            $stmt->bindValue(":uname", $username);
+            $stmt->bindValue(":upass", $pass);
+
+            // execute Query
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            if (count($results) > 0) {
+                $_SESSION["errorType"] = "success";
+                $_SESSION["errorMsg"] = "You have successfully logged in.";
+
+                $_SESSION["user_id"] = $results[0]["u_userid"];
+                $_SESSION["rolecode"] = $results[0]["u_rolecode"];
+                $_SESSION["username"] = $results[0]["u_username"];
+
+                redirect("index.php");
+                exit;
+            } else {
+                $_SESSION["errorType"] = "info";
+                $_SESSION["errorMsg"] = "username or password does not exist.";
             }
+        } catch (Exception $ex) {
+
+            $_SESSION["errorType"] = "danger";
+            $_SESSION["errorMsg"] = $ex->getMessage();
         }
+    }
+    redirect("login.php");
+}
+// include 'header.php';
 ?>
+<div class="row">
+    <div class="col-lg-9">
+        <form class="form-horizontal" name="contact_form" id="contact_form" method="post" action="">
+            <input type="hidden" name="mode" value="login" >
+
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" for="username"><span class="required">*</span>Username:</label>
+                    <div class="col-lg-6">
+                        <input type="text" value="" placeholder="User Name" id="username" class="form-control" name="username" required="" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" for="user_password"><span class="required">*</span>Password:</label>
+                    <div class="col-lg-6">
+                        <input type="password" value="" placeholder="Password" id="user_password" class="form-control" name="user_password" required="" >
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-lg-6 col-lg-offset-2">
+                        <button class="btn btn-primary" type="submit">Submit</button> 
+                    </div>
+                </div>
+                
+                <div style="height: 10px;">&nbsp;</div>
+                <div class="form-group">
+                    <div class="col-lg-6 col-lg-offset-2">
+                       <div class="help-block">
+                    <strong>Role == username/password</strong><br>
+                    Superadmin == shahrukh/123456<br>
+                    Admin == ronaldo/ronaldo<br>
+                </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="col-lg-3">
+        <!-- <?php include 'sidebar.php'; ?> -->
+    </div>
+</div>
+<!-- <?php include 'footer.php'; ?> -->

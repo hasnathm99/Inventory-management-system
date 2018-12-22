@@ -29,17 +29,26 @@ require_once('include\db_connect.php');
                                             $counter=0;
                                             $query="select product_name, sum(ream) from purchase group by product_name";
                                             $query_run=mysqli_query($connect, $query);
+
                                             while($row=mysqli_fetch_array($query_run)){
                                                 $counter++;
+                                                $product_name=$row['product_name'];
+                                                $sum_ream=$row['sum(ream)'];
+
+                                                $query2="update product set total_ream =$sum_ream where product_name='$product_name' ";
+                                                $quer2_run=mysqli_query($connect , $query2);
                                             ?>
                                             
                                             <tr>
                                                 <td><?php echo $counter; ?></td>
-                                            <td><?php echo $row['product_name'] ?></td>
-                                                <td><?php echo $row['sum(ream)']; ?></td>
+                                            <td><?php echo $product_name ; ?></td>
+                                                <td><?php echo $sum_ream ; ?></td>
                                                                                          
                                             </tr>
-                                            <?php } ?>
+
+                                            <?php 
+                                            
+                                        } ?>
                                             </tr>
                                         </tbody>
                                     </table>
